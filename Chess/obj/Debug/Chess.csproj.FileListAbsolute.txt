@@ -1,1 +1,10 @@
 c:\users\fauricio\documents\visual studio 2012\Chess\Chess\bin\Debug\Chess.exe.config
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.Properties.Resources.resources
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.csproj.GenerateResource.Cache
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.exe
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.index.resources
+C:\Users\Fauricio\Documents\Visual Studio 2012\Chess\Chess\obj\Debug\Chess.Pieza.resources

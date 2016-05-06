@@ -44,14 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="index.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="index.Designer.cs">
+      <DependentUpon>index.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pieza.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pieza.Designer.cs">
+      <DependentUpon>Pieza.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="index.resx">
+      <DependentUpon>index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pieza.resx">
+      <DependentUpon>Pieza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -73,6 +85,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagenes\bishop-black.png" />
+    <Content Include="Imagenes\bishop-white.png" />
+    <Content Include="Imagenes\horse_black.png" />
+    <Content Include="Imagenes\horse_white.png" />
+    <Content Include="Imagenes\king_black.png" />
+    <Content Include="Imagenes\king_white.png" />
+    <Content Include="Imagenes\knight_black.png" />
+    <Content Include="Imagenes\knight_white.png" />
+    <Content Include="Imagenes\queen_black.png" />
+    <Content Include="Imagenes\queen_white.png" />
+    <Content Include="Imagenes\tower_black.png" />
+    <Content Include="Imagenes\tower_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
