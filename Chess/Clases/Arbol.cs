@@ -89,9 +89,152 @@ namespace Chess.Clases
 
             return tableros;
         }
-    
-        public void torre()
-        { }
+
+        public List<int[,]> torre(int[,] tablero, int jugador, int i, int j)
+        { 
+            List<int[,]> tableros = new List<int[,]>();
+            int c;
+
+            switch (jugador)
+            { 
+                // Torre blanca.
+                case 1:
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                // Torre negra.
+                case 2:
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] < 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] < 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] < 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] < 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+
+            return tableros;
+        }
 
         public List<int[,]> caballo(int[,] tablero, int jugador, int i, int j)
         {
@@ -238,12 +381,558 @@ namespace Chess.Clases
             return tableros;
         }
 
-        public void alfil()
-        { }
-        public void reina()
-        { }
-        public void rey()
-        { }
+        public List<int[,]> alfil(int[,] tablero, int jugador, int i, int j)
+        { 
+            List<int[,]> tableros = new List<int[,]>();
+            int c;
+
+            switch (jugador)
+            {
+                // Alfil blanco.
+                case 1:
+                    // Hacia arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo izquierda. 
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+                // Alfil negro.
+                case 2:
+                    // Arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                if (tablero[i - c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                if (tablero[i - c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                if (tablero[i + c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Abajo izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                if (tablero[i + c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+            }
+
+            return tableros;
+        }
+        
+        public List<int[,]> reina(int[,] tablero, int jugador, int i, int j)
+        { 
+            List<int[,]> tableros = new List<int[,]>();
+            int c;
+
+            switch (jugador)
+            {
+                // Reina blanca.
+                case 1:
+                    // Hacia arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                // Reina negra.
+                case 2:
+                    // Hacia la izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (j - c >= 0)
+                        {
+                            if (tablero[i, j - c] == 0 || tablero[i, j - c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, j - c));
+                                if (tablero[i, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia la derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (j + c < 8)
+                        {
+                            if (tablero[i, j + c] == 0 || tablero[i, j + c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i, j + c));
+                                if (tablero[i, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0)
+                        {
+                            if (tablero[i - c, j] == 0 || tablero[i - c, j] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j));
+                                if (tablero[i - c, j] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8)
+                        {
+                            if (tablero[i + c, j] == 0 || tablero[i + c, j] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j));
+                                if (tablero[i + c, j] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba-izquierda
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                if (tablero[i - c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba-derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                if (tablero[i - c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo-derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                if (tablero[i + c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo-izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
+                            {
+                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                if (tablero[i + c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+            }
+
+            return tableros;
+        }
+        
+        public List<int[,]> rey(int[,] tablero, int jugador, int i, int j)
+        { 
+            List<int[,]> tableros = new List<int[,]>();
+
+            switch (jugador)
+            {
+                // Rey blanco.
+                case 1:
+                    // Hacia arriba.
+                    if (i - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j] == 0 || tablero[i - 1, j] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
+                    }
+                    // Hacia arriba derecha.
+                    if (i - 1 >= 0 && j + 1 < 8)
+                    {
+                        if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
+                    }
+                    // Hacia la derecha.
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] == 0 || tablero[i, j + 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, j + 1));
+                    }
+                    // Hacia la derecha abajo.
+                    if (i + 1 < 8 && j + 1 < 8)
+                    {
+                        if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 1));
+                    }
+                    // Hacia abajo.
+                    if (i + 1 < 8)
+                    {
+                        if (tablero[i + 1, j] == 0 || tablero[i + 1, j] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
+                    }
+                    // Hacia abajo izquierda.
+                    if (i + 1 < 8 && j - 1 >= 0)
+                    {
+                        if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 1));
+                    }
+                    // Hacia la izquierda.
+                    if (j - 1 >= 0)
+                    {
+                        if (tablero[i, j - 1] == 0 || tablero[i, j - 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, j - 1));
+                    }
+                    // Hacia la arriba izquierda.
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] < 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 1));
+                    }
+                    break;
+                // Rey negro.
+                case 2:
+                    // Hacia arriba.
+                    if (i - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j] == 0 || tablero[i - 1, j] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
+                    }
+                    // Hacia arriba derecha
+                    if (i - 1 >= 0 && j + 1 < 8)
+                    {
+                        if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
+                    }
+                    // Hacia la derecha.
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] == 0 || tablero[i, j + 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, j + 1));
+                    }
+                    // Hacia abajo derecha.
+                    if (i + 1 < 8 && j + 1 < 8)
+                    {
+                        if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 1));
+                    }
+                    // Hacia abajo.
+                    if (i + 1 < 8)
+                    {
+                        if (tablero[i + 1, j] == 0 || tablero[i + 1, j] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
+                    }
+                    // Hacia abajo izquierda.
+                    if (i + 1 < 8 && j - 1 >= 0)
+                    {
+                        if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 1));
+                    }
+                    // Hacia la izquierda.
+                    if (j - 1 >= 0)
+                    {
+                        if (tablero[i, j - 1] == 0 || tablero[i, j - 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i, j - 1));
+                    }
+                    // Hacia la izquierda arriba.
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] > 10)
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 1));
+                    }
+                    break;
+            }
+
+            return tableros;
+        }
 
         public List<Nodo> agregarHijos(List<Nodo> hijos, List<int[,]> tableros) 
         {
@@ -290,7 +979,7 @@ namespace Chess.Clases
                 }
                 else if(cuadro.codigo == 2 || cuadro.codigo == 12) // Torres
                 {
-                
+                    this.raiz.hijos = agregarHijos(this.raiz.hijos, torre(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
                 }
                 else if(cuadro.codigo == 3 || cuadro.codigo == 13) // Caballos
                 {
@@ -298,15 +987,15 @@ namespace Chess.Clases
                 }
                 else if(cuadro.codigo == 4 || cuadro.codigo == 14) // Alfiles
                 {
-                
+                    this.raiz.hijos = agregarHijos(this.raiz.hijos, alfil(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
                 }
                 else if(cuadro.codigo == 5 || cuadro.codigo == 15) // Reina
                 {
-                
+                    this.raiz.hijos = agregarHijos(this.raiz.hijos, reina(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
                 }
                 else if (cuadro.codigo == 6 || cuadro.codigo == 16) // Rey
                 {
-                
+                    this.raiz.hijos = agregarHijos(this.raiz.hijos, rey(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
                 }
             }
         }

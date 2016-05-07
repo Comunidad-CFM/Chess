@@ -31,8 +31,6 @@ namespace Chess
             arbol = new Arbol(table);
             arbol.arbolDeJugadas(turnoActual);
 
-            
-
             // Para las blancas
             // 11: Peon
             // 12: Torre
@@ -782,9 +780,7 @@ namespace Chess
                     for (c = i - 1; c > -1; c--)
                     {
                         if (this.table[c, j] == 0)
-                        {
                             this.bits[c, j] = 2;
-                        }
                         else
                         {
                             if (this.table[c, j] > 10)
@@ -800,9 +796,7 @@ namespace Chess
                     for (c = i + 1; c < 8; c++)
                     {
                         if (this.table[c, j] == 0)
-                        {
                             this.bits[c, j] = 2;
-                        }
                         else
                         {
                             if (this.table[c, j] > 10)
@@ -818,9 +812,7 @@ namespace Chess
                     for (c = j - 1; c > -1; c--)
                     {
                         if (this.table[i, c] == 0)
-                        {
                             this.bits[i, c] = 2;
-                        }
                         else
                         {
                             if (this.table[i, c] > 10)
@@ -836,9 +828,7 @@ namespace Chess
                     for (c = j + 1; c < 8; c++)
                     {
                         if (this.table[i, c] == 0)
-                        {
                             this.bits[i, c] = 2;
-                        }
                         else
                         {
                             if (this.table[i, c] > 10)
@@ -1124,6 +1114,7 @@ namespace Chess
                         }
                     }
                     break;
+                // Rey blanco.
                 case 16:
                     // Hacia arriba.
                     if (i - 1 >= 0)
