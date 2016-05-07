@@ -31,7 +31,7 @@ namespace Chess.Clases
 
             switch (jugador)
             {
-                // Peon negro.
+                // Peon blanco.
                 case 1:
                     // Hacia la izquierda.
                     if (j - 1 >= 0)
@@ -58,7 +58,7 @@ namespace Chess.Clases
                             tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
                     }
                     break;
-                // Peon blanco.
+                // Peon negro.
                 case 2:
                     // Hacia abajo-izquierda.
                     if (j - 1 >= 0)
@@ -92,8 +92,152 @@ namespace Chess.Clases
     
         public void torre()
         { }
-        public void caballo()
-        { }
+
+        public List<int[,]> caballo(int[,] tablero, int jugador, int i, int j)
+        {
+            List<int[,]> tableros = new List<int[,]>();
+
+            switch (jugador)
+            {
+                // Caballo blanco.
+                case 1:
+                    // Hacia arriba.
+                    if (i - 2 >= 0)
+                    {
+                        // Izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i - 2, j - 1] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j - 1));
+                        }
+                        // Derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i - 2, j + 1] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j + 1));
+                        }
+                    }
+                    // Hacia abajo.
+                    if (i + 2 < 8)
+                    {
+                        // Izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i + 2, j - 1] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j - 1));
+                        }
+                        // Derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i + 2, j + 1] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j + 1));
+                        }
+                    }
+                    // Hacia la izquierda.
+                    if (j - 2 >= 0)
+                    {
+                        // Arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j - 2] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 2));
+                        }
+                        // Derecha.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j - 2] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 2));
+                        }
+                    }
+                    // Hacia la derecha.
+                    if (j + 2 < 8)
+                    {
+                        // Arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j + 2] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 2));
+                        }
+                        // Abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j + 2] < 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 2));
+                        }
+                    }
+                    break;
+                // Caballo negro.
+                case 2:
+                    // Hacia arriba.
+                    if (i - 2 >= 0)
+                    {
+                        // Hacia la izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i - 2, j - 1] == 0 || tablero[i - 2, j - 1] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j - 1));
+                        }
+                        // Hacia la derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i - 2, j + 1] == 0 || tablero[i - 2, j + 1] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j + 1));
+                        }
+                    }
+                    // Hacia abajo.
+                    if (i + 2 < 8)
+                    {
+                        // Hacia la izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i + 2, j - 1] == 0 || tablero[i + 2, j - 1] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j - 1));
+                        }
+                        // Hacia la derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i + 2, j + 1] == 0 || tablero[i + 2, j + 1] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j + 1));
+                        }
+                    }
+                    // Hacia la izquierda.
+                    if (j - 2 >= 0)
+                    {
+                        // Hacia arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j - 2] == 0 || tablero[i - 1, j - 2] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 2));
+                        }
+                        // Hacia abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j - 2] == 0 || tablero[i + 1, j - 2] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 2));
+                        }
+                    }
+                    // Hacia la derecha.
+                    if (j + 2 < 8)
+                    {
+                        // Hacia arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j + 2] == 0 || tablero[i - 1, j + 2] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 2));
+                        }
+                        // Hacia abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j + 2] == 0 || tablero[i + 1, j + 2] > 10)
+                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 2));
+                        }
+                    }
+                    break;
+            }
+
+            return tableros;
+        }
+
         public void alfil()
         { }
         public void reina()
@@ -134,7 +278,7 @@ namespace Chess.Clases
             return cuadros;
         }
 
-        public void mejorJugada(int jugador) 
+        public void arbolDeJugadas(int jugador) 
         { 
             List<Cuadro> cuadros = obtenerCuadros(this.raiz.tablero, jugador); 
             
@@ -150,7 +294,7 @@ namespace Chess.Clases
                 }
                 else if(cuadro.codigo == 3 || cuadro.codigo == 13) // Caballos
                 {
-                
+                    this.raiz.hijos = agregarHijos(this.raiz.hijos, caballo(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
                 }
                 else if(cuadro.codigo == 4 || cuadro.codigo == 14) // Alfiles
                 {
