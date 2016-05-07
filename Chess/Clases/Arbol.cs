@@ -967,36 +967,52 @@ namespace Chess.Clases
             return cuadros;
         }
 
-        public void arbolDeJugadas(int jugador) 
-        { 
-            List<Cuadro> cuadros = obtenerCuadros(this.raiz.tablero, jugador); 
-            
+        public List<Nodo> obtenerNivel(Nodo nodo, int jugador)
+        {
+            List<Cuadro> cuadros = obtenerCuadros(nodo.tablero, jugador);
+
             foreach (Cuadro cuadro in cuadros)
             {
                 if (cuadro.codigo == 1 || cuadro.codigo == 11) // Peones
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, peon(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, peon(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
-                else if(cuadro.codigo == 2 || cuadro.codigo == 12) // Torres
+                else if (cuadro.codigo == 2 || cuadro.codigo == 12) // Torres
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, torre(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, torre(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
-                else if(cuadro.codigo == 3 || cuadro.codigo == 13) // Caballos
+                else if (cuadro.codigo == 3 || cuadro.codigo == 13) // Caballos
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, caballo(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, caballo(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
-                else if(cuadro.codigo == 4 || cuadro.codigo == 14) // Alfiles
+                else if (cuadro.codigo == 4 || cuadro.codigo == 14) // Alfiles
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, alfil(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, alfil(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
-                else if(cuadro.codigo == 5 || cuadro.codigo == 15) // Reina
+                else if (cuadro.codigo == 5 || cuadro.codigo == 15) // Reina
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, reina(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, reina(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
                 else if (cuadro.codigo == 6 || cuadro.codigo == 16) // Rey
                 {
-                    this.raiz.hijos = agregarHijos(this.raiz.hijos, rey(this.raiz.tablero, jugador, cuadro.i, cuadro.j));
+                    nodo.hijos = agregarHijos(nodo.hijos, rey(nodo.tablero, jugador, cuadro.i, cuadro.j));
                 }
+            }
+
+            return nodo.hijos;
+        }
+
+        public void arbolDeJugadas(Nodo nodo, int jugador, int profundidad) 
+        {
+            if (profundidad == 3) 
+                return;
+            nodo.hijos = obtenerNivel(nodo, jugador);
+
+            jugador = jugador % 2 + 1;
+            foreach (Nodo hijo in this.raiz.hijos)
+            {
+                hijo.hijos = obtenerNivel(hijo, jugador);
+                arbolDeJugadas(hijo, jugador % 2 + 1, profundidad + 1);
             }
         }
     }
