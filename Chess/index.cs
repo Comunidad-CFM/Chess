@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess.Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,17 +16,22 @@ namespace Chess
         int[,] table;
         int[,] bits;
         Pieza[,] tablero;
+        Arbol arbol;
         int I, J;
         bool move_QB = true;
         bool move_RB = true;
         bool move_QW = true;
         bool move_RW = true;
+        int turnoActual = 1;
 
         public index()
         {
             InitializeComponent();
+            prepararTableros();
+            arbol = new Arbol(table);
+            arbol.mejorJugada(turnoActual);
+
             
-            prepararTableros();            
 
             // Para las blancas
             // 11: Peon
@@ -49,6 +55,22 @@ namespace Chess
 
         private void index_Load(object sender, EventArgs e)
         { }
+
+        public void cambiarTurno() 
+        { 
+            turnoActual = turnoActual % 2 + 1;
+        }
+
+        public void setJugadorActual() {
+            if (turnoActual == 1)
+            {
+                jugadorActual.ImageLocation = @"..\..\Imagenes\knight_white.png";
+            }
+            else 
+            {
+                jugadorActual.ImageLocation = @"..\..\Imagenes\knight_black.png";
+            }
+        }
 
         public void inicializarTableros() 
         {
@@ -83,6 +105,20 @@ namespace Chess
             J = 0;
         }
 
+        public void finDeJuego(int codigo) 
+        {
+            if (codigo == 6) // Ganan las blancas
+            {
+                ganador.ImageLocation = @"..\..\Imagenes\knight_white.png";
+                grupoGanador.Visible = true;
+            }
+            else if (codigo == 16) // Ganan las negras
+            {
+                ganador.ImageLocation = @"..\..\Imagenes\knight_black.png";
+                grupoGanador.Visible = true;
+            }
+        }
+
         public void validate()
         {
             int i, j, length = 8;
@@ -115,6 +151,8 @@ namespace Chess
 
         public void cambiarPiezas(int i, int j)
         {
+            int codigo = this.table[i, j];
+
             if (this.table[I, J] == 02)
                 move_RB = false;
             if (this.table[I, J] == 12)
@@ -123,7 +161,9 @@ namespace Chess
                 move_QB = false;
             if (this.table[I, J] == 16)
                 move_QW = false;
+
             this.table[i, j] = this.table[I, J];
+
             if (this.table[I, J] == 06)
             {
                 if (i == 0 && j == 2)
@@ -142,6 +182,7 @@ namespace Chess
             validate();
             dibujar();
             marcarJugadas();
+            finDeJuego(codigo);
         }
 
         public void dibujar() 
@@ -175,6 +216,7 @@ namespace Chess
         public void prepararTableros()
         {
             inicializarTableros();
+            setJugadorActual();
 
             int i, j, length = 8;
 
@@ -278,13 +320,12 @@ namespace Chess
             switch (x)
             {
                 case 1:
+                    // Peon negro.
                     // Hacia abajo-izquierda.
                     if (j - 1 >= 0)
                     {
                         if (this.table[i + 1, j - 1] > 10)
-                        {
                             this.bits[i + 1, j - 1] = 2;
-                        }
                     }
                     // Hacia abajo 1
                     if (this.table[i + 1, j] == 0)
@@ -295,122 +336,199 @@ namespace Chess
                         if (i == 1)
                         {
                             if (this.table[i + 2, j] == 0)
-                            {
                                 this.bits[i + 2, j] = 2;
-                            }
                         }
                     }
                     // Hacia abajo-derecha
                     if (j + 1 < 8)
                     {
                         if (this.table[i + 1, j + 1] > 10)
-                        {
                             this.bits[i + 1, j + 1] = 2;
-                        }
                     }
                     break;
                 case 2:
+                    // Torre negra.
+                    // Hacia arriba.
                     for (c = i - 1; c > -1; c--)
+                    {
                         if (this.table[c, j] == 0)
-                        { this.bits[c, j] = 2; }
+                            this.bits[c, j] = 2;
                         else
+                        {
                             if (this.table[c, j] < 10)
                                 break;
                             else
-                            { this.bits[c, j] = 2; break; }
+                                this.bits[c, j] = 2; break;
+                        }
+                    }
+                    // Hacia abajo.
                     for (c = i + 1; c < 8; c++)
+                    {
                         if (this.table[c, j] == 0)
-                        { this.bits[c, j] = 2; }
+                            this.bits[c, j] = 2;
                         else
+                        {
                             if (this.table[c, j] < 10)
                                 break;
                             else
-                            { this.bits[c, j] = 2; break; }
+                                this.bits[c, j] = 2; break;
+                        }
+                    }
+                    // Hacia la izquierda.
                     for (c = j - 1; c > -1; c--)
+                    {
                         if (this.table[i, c] == 0)
-                        { this.bits[i, c] = 2; }
+                            this.bits[i, c] = 2;
                         else
+                        {
                             if (this.table[i, c] < 10)
                                 break;
                             else
-                            { this.bits[i, c] = 2; break; }
+                                this.bits[i, c] = 2; break; 
+                        }
+                    }
+                    // Hacia la derecha.
                     for (c = j + 1; c < 8; c++)
+                    {
                         if (this.table[i, c] == 0)
-                        { this.bits[i, c] = 2; }
+                            this.bits[i, c] = 2;
                         else
+                        {
                             if (this.table[i, c] < 10)
                                 break;
                             else
-                            { this.bits[i, c] = 2; break; }
+                                this.bits[i, c] = 2; break; 
+                        }
+                    }
                     break;
                 case 3:
+                    // Caballo negro.
+                    // Hacia arriba.
                     if (i - 2 >= 0)
                     {
+                        // Hacia la izquierda.
                         if (j - 1 >= 0)
+                        {
                             if (this.table[i - 2, j - 1] == 0 || this.table[i - 2, j - 1] > 10)
                                 this.bits[i - 2, j - 1] = 2;
+                        }
+                        // Hacia la derecha.
                         if (j + 1 < 8)
+                        {
                             if (this.table[i - 2, j + 1] == 0 || this.table[i - 2, j + 1] > 10)
                                 this.bits[i - 2, j + 1] = 2;
+                        }
                     }
+                    // Hacia abajo.
                     if (i + 2 < 8)
                     {
-
+                        // Hacia la izquierda.
                         if (j - 1 >= 0)
+                        {
                             if (this.table[i + 2, j - 1] == 0 || this.table[i + 2, j - 1] > 10)
                                 this.bits[i + 2, j - 1] = 2;
+                        }
+                        // Hacia la derecha.
                         if (j + 1 < 8)
+                        {
                             if (this.table[i + 2, j + 1] == 0 || this.table[i + 2, j + 1] > 10)
                                 this.bits[i + 2, j + 1] = 2;
+                        }
                     }
+                    // Hacia la izquierda.
                     if (j - 2 >= 0)
                     {
-
+                        // Hacia arriba.
                         if (i - 1 >= 0)
+                        {
                             if (this.table[i - 1, j - 2] == 0 || this.table[i - 1, j - 2] > 10)
                                 this.bits[i - 1, j - 2] = 2;
+                        }
+                        // Hacia abajo.
                         if (i + 1 < 8)
+                        {
                             if (this.table[i + 1, j - 2] == 0 || this.table[i + 1, j - 2] > 10)
                                 this.bits[i + 1, j - 2] = 2;
+                        }
                     }
+                    // Hacia la derecha.
                     if (j + 2 < 8)
                     {
-
+                        // Hacia arriba.
                         if (i - 1 >= 0)
+                        {
                             if (this.table[i - 1, j + 2] == 0 || this.table[i - 1, j + 2] > 10)
                                 this.bits[i - 1, j + 2] = 2;
+                        }
+                        // Hacia abajo.
                         if (i + 1 < 8)
+                        {
                             if (this.table[i + 1, j + 2] == 0 || this.table[i + 1, j + 2] > 10)
                                 this.bits[i + 1, j + 2] = 2;
-                    } break;
+                        }
+                    } 
+                    break;
                 case 4:
+                    // Alfil negro.
                     for (c = 1; c < 8; c++)
+                    {
                         if (i - c >= 0 && j - c >= 0)
+                        {
                             if (this.table[i - c, j - c] == 0 || this.table[i - c, j - c] > 10)
-                            { this.bits[i - c, j - c] = 2; if (this.table[i - c, j - c] > 10) break; }
+                            { 
+                                this.bits[i - c, j - c] = 2;
+                                if (this.table[i - c, j - c] > 10) 
+                                    break; 
+                            }
                             else
                                 break;
+                        }
+                    }
                     for (c = 1; c < 8; c++)
+                    {
                         if (i - c >= 0 && j + c < 8)
+                        {
                             if (this.table[i - c, j + c] == 0 || this.table[i - c, j + c] > 10)
-                            { this.bits[i - c, j + c] = 2; if (this.table[i - c, j + c] > 10) break; }
+                            { 
+                                this.bits[i - c, j + c] = 2; 
+                                if (this.table[i - c, j + c] > 10) 
+                                    break; 
+                            }
                             else
                                 break;
+                        }
+                    }
                     for (c = 1; c < 8; c++)
+                    {
                         if (i + c < 8 && j + c < 8)
+                        {
                             if (this.table[i + c, j + c] == 0 || this.table[i + c, j + c] > 10)
-                            { this.bits[i + c, j + c] = 2; if (this.table[i + c, j + c] > 10) break; }
+                            { 
+                                this.bits[i + c, j + c] = 2; 
+                                if (this.table[i + c, j + c] > 10) 
+                                    break; 
+                            }
                             else
                                 break;
+                        }
+                    }
                     for (c = 1; c < 8; c++)
+                    {
                         if (i + c < 8 && j - c >= 0)
+                        {
                             if (this.table[i + c, j - c] == 0 || this.table[i + c, j - c] > 10)
-                            { this.bits[i + c, j - c] = 2; if (this.table[i + c, j - c] > 10) break; }
+                            { 
+                                this.bits[i + c, j - c] = 2;
+                                if (this.table[i + c, j - c] > 10)
+                                    break; 
+                            }
                             else
                                 break;
-
+                        }
+                    }
                     break;
                 case 5:
+                    // Reina negra.
                     // Hacia la izquierda.
                     for (c = 1; c < 8; c++)
                     {
@@ -423,14 +541,10 @@ namespace Chess
                                     break;
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia la derecha.
                     for (c = 1; c < 8; c++)
@@ -441,19 +555,13 @@ namespace Chess
                             {
                                 this.bits[i, j + c] = 2;
                                 if (this.table[i, j + c] > 10)
-                                {
                                     break;
-                                }
                             }
                             else 
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia arriba.
                     for (c = 1; c < 8; c++)
@@ -463,19 +571,14 @@ namespace Chess
                             if (this.table[i - c, j] == 0 || this.table[i - c, j] > 10)
                             {
                                 this.bits[i - c, j] = 2;
-                                if (this.table[i - c, j] > 10) {
-                                    break; 
-                                }
+                                if (this.table[i - c, j] > 10)
+                                    break;
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia abajo.
                     for (c = 1; c < 8; c++)
@@ -486,19 +589,13 @@ namespace Chess
                             {
                                 this.bits[i + c, j] = 2;
                                 if (this.table[i + c, j] > 10)
-                                {
                                     break;
-                                }
                             }
                             else 
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia arriba-izquierda
                     for (c = 1; c < 8; c++)
@@ -509,19 +606,13 @@ namespace Chess
                             {
                                 this.bits[i - c, j - c] = 2;
                                 if (this.table[i - c, j - c] > 10)
-                                {
                                     break;
-                                }
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else 
-                        {
                             break;
-                        }
                     }
                     // Hacia arriba-derecha.
                     for (c = 1; c < 8; c++)
@@ -532,19 +623,13 @@ namespace Chess
                             {
                                 this.bits[i - c, j + c] = 2;
                                 if (this.table[i - c, j + c] > 10)
-                                {
                                     break;
-                                }
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia abajo-derecha.
                     for (c = 1; c < 8; c++)
@@ -555,19 +640,13 @@ namespace Chess
                             {
                                 this.bits[i + c, j + c] = 2;
                                 if (this.table[i + c, j + c] > 10)
-                                {
                                     break;
-                                }
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     // Hacia abajo-izquierda.
                     for (c = 1; c < 8; c++)
@@ -578,22 +657,17 @@ namespace Chess
                             { 
                                 this.bits[i + c, j - c] = 2;
                                 if (this.table[i + c, j - c] > 10)
-                                {
                                     break;
-                                }
                             }
                             else
-                            {
                                 break;
-                            }
                         }
                         else
-                        {
                             break;
-                        }
                     }
                     break;
                 case 6:
+                    // Rey negro.
                     if (i - 1 >= 0)
                         if (this.table[i - 1, j] == 0 || this.table[i - 1, j] > 10)
                             this.bits[i - 1, j] = 2;
@@ -628,13 +702,12 @@ namespace Chess
 
                     break;
                 case 11:
+                    // Peon blanco.
                     // Hacia la izquierda.
                     if (j - 1 >= 0)
                     {
                         if (this.table[i - 1, j - 1] < 10 && this.table[i - 1, j - 1] != 0)
-                        {
                             this.bits[i - 1, j - 1] = 2;
-                        }
                     }
                     // Hacia arriba 1.
                     if (this.table[i - 1, j] == 0)
@@ -645,18 +718,14 @@ namespace Chess
                         if (i == 6)
                         {
                             if (this.table[i - 2, j] == 0)
-                            {
                                 this.bits[i - 2, j] = 2;
-                            }
                         }
                     }
                     // Hacia la derecha.
                     if (j + 1 < 8)
                     {
                         if (this.table[i - 1, j + 1] < 10 && this.table[i - 1, j + 1] != 0)
-                        {
                             this.bits[i - 1, j + 1] = 2;
-                        }
                     }
                     break;
                 case 12:
@@ -869,18 +938,19 @@ namespace Chess
                 case 1:
                     Pieces(this.table[i, j], i, j);
                     I = i;
-                    J = j; 
+                    J = j;
                     break;
 
                 case 3:
-                    validate(); 
+                    validate();
                     break;
 
                 case 2:
-                    cambiarPiezas(i, j); 
+                    cambiarPiezas(i, j);
+                    cambiarTurno();
+                    setJugadorActual();
                     break;
             }
-
         }
 
         private void reset(object sender, EventArgs e)
