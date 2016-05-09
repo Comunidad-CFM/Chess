@@ -17,6 +17,7 @@ namespace Chess
         int[,] bits;
         Pieza[,] tablero;
         Arbol arbol;
+        Nodo nodo;
         int I, J;
         bool move_QB = true;
         bool move_RB = true;
@@ -79,7 +80,7 @@ namespace Chess
                 {00, 00, 00, 00, 00, 00, 00, 00},
                 {00, 00, 00, 00, 00, 00, 00, 00},
                 {00, 00, 00, 00, 00, 00, 00, 00},
-                {00, 01, 00, 00, 00, 00, 00, 00},
+                {00, 00, 00, 00, 00, 00, 00, 00},
                 {11, 11, 11, 11, 11, 11, 11, 11},
                 {12, 13, 14, 15, 16, 14, 13, 12},
             };
@@ -1210,7 +1211,13 @@ namespace Chess
         private void mejorJugada(object sender, EventArgs e)
         {
             arbol = new Arbol(table);
-            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 3);
+            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
+            nodo = arbol.mejorJugada(arbol.raiz, true);
+
+            table = nodo.tablero;
+            dibujar();
+            cambiarTurno();
+            setJugadorActual();
         }
     }
 }

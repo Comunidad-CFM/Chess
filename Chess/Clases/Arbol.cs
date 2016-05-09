@@ -37,6 +37,7 @@ namespace Chess.Clases
                     if (hijoAlpha2.utilidad > hijoAlpha.utilidad)
                     {
                         hijoAlpha = hijoAlpha2;
+                        hijoAlpha.tablero = hijo.tablero;
                     }
                 }
 
@@ -52,6 +53,7 @@ namespace Chess.Clases
                     if (hijoBeta2.utilidad < hijoBeta.utilidad)
                     {
                         hijoBeta = hijoBeta2;
+                        hijoBeta.tablero = hijo.tablero;
                     }
                 }
 
@@ -89,7 +91,7 @@ namespace Chess.Clases
                 // Peon blanco.
                 case 1:
                     // Hacia la izquierda arriba.
-                    if (j - 1 >= 0)
+                    if (j - 1 >= 0 && i - 1 >= 0)
                     {
                         if (tablero[i - 1, j - 1] < 10 && tablero[i - 1, j - 1] != 0)
                             tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 1), i, j, i - 1, j - 1));
@@ -307,13 +309,13 @@ namespace Chess.Clases
                         if (j - 1 >= 0)
                         {
                             if (tablero[i - 2, j - 1] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j - 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 2, j - 1), i, j, i - 2, j - 1));
                         }
                         // Derecha.
                         if (j + 1 < 8)
                         {
                             if (tablero[i - 2, j + 1] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j + 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 2, j + 1), i, j, i - 2, j + 1));
                         }
                     }
                     // Hacia abajo.
@@ -323,13 +325,13 @@ namespace Chess.Clases
                         if (j - 1 >= 0)
                         {
                             if (tablero[i + 2, j - 1] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j - 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 2, j - 1), i, j, i + 2, j - 1));
                         }
                         // Derecha.
                         if (j + 1 < 8)
                         {
                             if (tablero[i + 2, j + 1] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j + 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 2, j + 1), i, j, i + 2, j + 1));
                         }
                     }
                     // Hacia la izquierda.
@@ -339,13 +341,13 @@ namespace Chess.Clases
                         if (i - 1 >= 0)
                         {
                             if (tablero[i - 1, j - 2] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 2), i, j, i - 1, j - 2));
                         }
                         // Derecha.
                         if (i + 1 < 8)
                         {
                             if (tablero[i + 1, j - 2] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 2), i, j, i + 1, j - 2));
                         }
                     }
                     // Hacia la derecha.
@@ -355,13 +357,13 @@ namespace Chess.Clases
                         if (i - 1 >= 0)
                         {
                             if (tablero[i - 1, j + 2] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 2), i, j, i - 1, j + 2));
                         }
                         // Abajo.
                         if (i + 1 < 8)
                         {
                             if (tablero[i + 1, j + 2] < 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 2), i, j, i + 1, j + 2));
                         }
                     }
                     break;
@@ -374,13 +376,13 @@ namespace Chess.Clases
                         if (j - 1 >= 0)
                         {
                             if (tablero[i - 2, j - 1] == 0 || tablero[i - 2, j - 1] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j - 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 2, j - 1), i, j, i - 2, j - 1));
                         }
                         // Hacia la derecha.
                         if (j + 1 < 8)
                         {
                             if (tablero[i - 2, j + 1] == 0 || tablero[i - 2, j + 1] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j + 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 2, j + 1), i, j, i - 2, j + 1));
                         }
                     }
                     // Hacia abajo.
@@ -390,13 +392,13 @@ namespace Chess.Clases
                         if (j - 1 >= 0)
                         {
                             if (tablero[i + 2, j - 1] == 0 || tablero[i + 2, j - 1] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j - 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 2, j - 1), i, j, i + 2, j - 1));
                         }
                         // Hacia la derecha.
                         if (j + 1 < 8)
                         {
                             if (tablero[i + 2, j + 1] == 0 || tablero[i + 2, j + 1] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j + 1));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 2, j + 1), i, j, i + 2, j + 1));
                         }
                     }
                     // Hacia la izquierda.
@@ -406,13 +408,13 @@ namespace Chess.Clases
                         if (i - 1 >= 0)
                         {
                             if (tablero[i - 1, j - 2] == 0 || tablero[i - 1, j - 2] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 2), i, j, i - 1, j - 2));
                         }
                         // Hacia abajo.
                         if (i + 1 < 8)
                         {
                             if (tablero[i + 1, j - 2] == 0 || tablero[i + 1, j - 2] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 2), i, j, i + 1, j - 2));
                         }
                     }
                     // Hacia la derecha.
@@ -422,13 +424,13 @@ namespace Chess.Clases
                         if (i - 1 >= 0)
                         {
                             if (tablero[i - 1, j + 2] == 0 || tablero[i - 1, j + 2] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 2), i, j, i - 1, j + 2));
                         }
                         // Hacia abajo.
                         if (i + 1 < 8)
                         {
                             if (tablero[i + 1, j + 2] == 0 || tablero[i + 1, j + 2] > 10)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 2));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 2), i, j, i + 1, j + 2));
                         }
                     }
                     break;
@@ -453,7 +455,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j - c), i, j, i - c, j - c));
                                 if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
                                     break;
                             }
@@ -470,7 +472,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j + c), i, j, i - c, j + c));
                                 if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
                                     break;
                             }
@@ -487,7 +489,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j + c), i, j, i + c, j + c));
                                 if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
                                     break;
                             }
@@ -504,7 +506,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j - c), i, j, i + c, j - c));
                                 if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
                                     break;
                             }
@@ -524,7 +526,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j - c), i, j, i - c, j - c));
                                 if (tablero[i - c, j - c] > 10)
                                     break;
                             }
@@ -541,7 +543,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j + c), i, j, i - c, j + c));
                                 if (tablero[i - c, j + c] > 10)
                                     break;
                             }
@@ -558,7 +560,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j + c), i, j, i + c, j + c));
                                 if (tablero[i + c, j + c] > 10)
                                     break;
                             }
@@ -575,7 +577,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j - c), i, j, i + c, j - c));
                                 if (tablero[i + c, j - c] > 10)
                                     break;
                             }
@@ -607,7 +609,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j - c), i, j, i - c, j - c));
                                 if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
                                     break;
                             }
@@ -624,7 +626,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j + c), i, j, i - c, j + c));
                                 if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
                                     break;
                             }
@@ -641,7 +643,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j + c), i, j, i + c, j + c));
                                 if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
                                     break;
                             }
@@ -658,7 +660,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j - c), i, j, i + c, j - c));
                                 if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
                                     break;
                             }
@@ -679,7 +681,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -695,7 +697,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -711,7 +713,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -727,7 +729,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -742,7 +744,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i, j - c] == 0 || tablero[i, j - c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j - c), i, j, i, j - c));
                                 if (tablero[i, j - c] > 10)
                                     break;
                             }
@@ -759,7 +761,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i, j + c] == 0 || tablero[i, j + c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j + c), i, j, i, j + c));
                                 if (tablero[i, j + c] > 10)
                                     break;
                             }
@@ -776,7 +778,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j] == 0 || tablero[i - c, j] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j), i, j, i - c, j));
                                 if (tablero[i - c, j] > 10)
                                     break;
                             }
@@ -793,7 +795,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j] == 0 || tablero[i + c, j] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j), i, j, i + c, j));
                                 if (tablero[i + c, j] > 10)
                                     break;
                             }
@@ -810,7 +812,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j - c), i, j, i - c, j - c));
                                 if (tablero[i - c, j - c] > 10)
                                     break;
                             }
@@ -827,7 +829,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i - c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - c, j + c), i, j, i - c, j + c));
                                 if (tablero[i - c, j + c] > 10)
                                     break;
                             }
@@ -844,7 +846,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j + c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j + c), i, j, i + c, j + c));
                                 if (tablero[i + c, j + c] > 10)
                                     break;
                             }
@@ -861,7 +863,7 @@ namespace Chess.Clases
                         {
                             if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i + c, j - c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + c, j - c), i, j, i + c, j - c));
                                 if (tablero[i + c, j - c] > 10)
                                     break;
                             }
@@ -889,49 +891,49 @@ namespace Chess.Clases
                     if (i - 1 >= 0)
                     {
                         if (tablero[i - 1, j] == 0 || tablero[i - 1, j] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j), i, j, i - 1, j));
                     }
                     // Hacia arriba derecha.
                     if (i - 1 >= 0 && j + 1 < 8)
                     {
                         if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 1), i, j, i - 1, j + 1));
                     }
                     // Hacia la derecha.
                     if (j + 1 < 8)
                     {
                         if (tablero[i, j + 1] == 0 || tablero[i, j + 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j + 1), i, j, i, j + 1));
                     }
                     // Hacia la derecha abajo.
                     if (i + 1 < 8 && j + 1 < 8)
                     {
                         if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 1), i, j, i + 1, j + 1));
                     }
                     // Hacia abajo.
                     if (i + 1 < 8)
                     {
                         if (tablero[i + 1, j] == 0 || tablero[i + 1, j] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j), i, j, i + 1, j));
                     }
                     // Hacia abajo izquierda.
                     if (i + 1 < 8 && j - 1 >= 0)
                     {
                         if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 1), i, j, i + 1, j - 1));
                     }
                     // Hacia la izquierda.
                     if (j - 1 >= 0)
                     {
                         if (tablero[i, j - 1] == 0 || tablero[i, j - 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j - 1), i, j, i, j - 1));
                     }
                     // Hacia la arriba izquierda.
                     if (i - 1 >= 0 && j - 1 >= 0)
                     {
                         if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] < 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 1), i, j, i - 1, j - 1));
                     }
                     break;
                 // Rey negro.
@@ -940,49 +942,49 @@ namespace Chess.Clases
                     if (i - 1 >= 0)
                     {
                         if (tablero[i - 1, j] == 0 || tablero[i - 1, j] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j), i, j, i - 1, j));
                     }
                     // Hacia arriba derecha
                     if (i - 1 >= 0 && j + 1 < 8)
                     {
                         if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 1), i, j, i - 1, j + 1));
                     }
                     // Hacia la derecha.
                     if (j + 1 < 8)
                     {
                         if (tablero[i, j + 1] == 0 || tablero[i, j + 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j + 1), i, j, i, j + 1));
                     }
                     // Hacia abajo derecha.
                     if (i + 1 < 8 && j + 1 < 8)
                     {
                         if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 1), i, j, i + 1, j + 1));
                     }
                     // Hacia abajo.
                     if (i + 1 < 8)
                     {
                         if (tablero[i + 1, j] == 0 || tablero[i + 1, j] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j), i, j, i + 1, j));
                     }
                     // Hacia abajo izquierda.
                     if (i + 1 < 8 && j - 1 >= 0)
                     {
                         if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 1), i, j, i + 1, j - 1));
                     }
                     // Hacia la izquierda.
                     if (j - 1 >= 0)
                     {
                         if (tablero[i, j - 1] == 0 || tablero[i, j - 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, j - 1), i, j, i, j - 1));
                     }
                     // Hacia la izquierda arriba.
                     if (i - 1 >= 0 && j - 1 >= 0)
                     {
                         if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 1), i, j, i - 1, j - 1));
                     }
                     break;
             }
