@@ -8,13 +8,13 @@ namespace Chess.Clases
 {
     class Nodo
     {
-        public int utilidad;
+        public double utilidad;
         public List<Nodo> hijos;
         public int[,] tablero;
 
-        public Nodo(int[,] tablero)
+        public Nodo(int[,] tablero, double utilidad)
         {
-            this.utilidad = -1;
+            this.utilidad = utilidad;
             this.hijos = new List<Nodo>();
             this.tablero = tablero;
         }

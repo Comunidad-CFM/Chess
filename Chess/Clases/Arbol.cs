@@ -9,9 +9,64 @@ namespace Chess.Clases
     class Arbol
     {
         public Nodo raiz;
+        public bool max = true;
+        int utilidadMin = -10000,
+            utilidadMax = 10000;
+        Utilidad utilidad;
+
         public Arbol(int[,] tablero) 
         {
-            this.raiz = new Nodo(tablero);
+            this.raiz = new Nodo(tablero, -1);
+            this.utilidad = new Utilidad();
+        }
+
+        public Nodo mejorJugada(Nodo raiz, Boolean Player)
+        {
+            if (raiz.hijos.Count == 0)
+            {
+                return raiz;
+            }
+
+            if (Player == max)
+            {
+                Nodo hijoAlpha = new Nodo(this.raiz.tablero, utilidadMin);
+                Nodo hijoAlpha2;
+                foreach (Nodo hijo in raiz.hijos)
+                {
+                    hijoAlpha2 = mejorJugada(hijo, !Player);
+                    if (hijoAlpha2.utilidad > hijoAlpha.utilidad)
+                    {
+                        hijoAlpha = hijoAlpha2;
+                    }
+                }
+
+                return hijoAlpha;
+            }
+            else
+            {
+                Nodo hijoBeta = new Nodo(this.raiz.tablero, utilidadMax);
+                Nodo hijoBeta2;
+                foreach (Nodo hijo in raiz.hijos)
+                {
+                    hijoBeta2 = mejorJugada(hijo, !Player);
+                    if (hijoBeta2.utilidad < hijoBeta.utilidad)
+                    {
+                        hijoBeta = hijoBeta2;
+                    }
+                }
+
+                return hijoBeta;
+            }
+        }
+
+        public int[,] limpiarCuadro(int[,] tablero, int i, int j)
+        {
+            int[,] copiaTablero = new int[8, 8];
+            Array.Copy(tablero, copiaTablero, 64);
+
+            copiaTablero[i, j] = 00;
+
+            return copiaTablero;
         }
 
         public int[,] obtenerTablero(int[,] tablero, int i, int j, int nuevoI, int nuevoJ)
@@ -33,11 +88,11 @@ namespace Chess.Clases
             {
                 // Peon blanco.
                 case 1:
-                    // Hacia la izquierda.
+                    // Hacia la izquierda arriba.
                     if (j - 1 >= 0)
                     {
                         if (tablero[i - 1, j - 1] < 10 && tablero[i - 1, j - 1] != 0)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 1), i, j, i - 1, j - 1));
                     }
                     // Hacia arriba 1.
                     if (tablero[i - 1, j] == 0)
@@ -51,11 +106,11 @@ namespace Chess.Clases
                                 tableros.Add(obtenerTablero(tablero, i, j, i - 2, j));
                         }
                     }
-                    // Hacia la derecha.
+                    // Hacia la derecha arriba.
                     if (j + 1 < 8)
                     {
                         if (tablero[i - 1, j + 1] < 10 && tablero[i - 1, j + 1] != 0)
-                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 1), i, j, i - 1, j + 1));
                     }
                     break;
                 // Peon negro.
@@ -64,7 +119,7 @@ namespace Chess.Clases
                     if (j - 1 >= 0)
                     {
                         if (tablero[i + 1, j - 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j - 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 1), i, j, i + 1, j - 1));
                     }
                     // Hacia abajo 1
                     if (tablero[i + 1, j] == 0)
@@ -82,7 +137,7 @@ namespace Chess.Clases
                     if (j + 1 < 8)
                     {
                         if (tablero[i + 1, j + 1] > 10)
-                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j + 1));
+                            tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 1), i, j, i + 1, j + 1));
                     }
                     break;
             }
@@ -110,7 +165,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -126,7 +181,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -142,7 +197,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -158,7 +213,8 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tablero[i, c] = 00;
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -177,7 +233,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -193,7 +249,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, c, j));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, c, j), i, j, c, j));
                                 break;
                             }
                         }
@@ -209,7 +265,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -225,7 +281,7 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tableros.Add(obtenerTablero(tablero, i, j, i, c));
+                                tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
                         }
@@ -938,64 +994,44 @@ namespace Chess.Clases
         {
             foreach (int[,] tablero in tableros)
             {
-                hijos.Add(new Nodo(tablero));
+                hijos.Add(new Nodo(tablero, -1));
             }
 
             return hijos;
         }
 
-        public List<Cuadro> obtenerCuadros(int[,] tablero, int jugador)
-        {
-            List<Cuadro> cuadros = new List<Cuadro>();
-            int i, j, length = 8;
-
-            for (i = 0; i < length; i++)
-            {
-                for (j = 0; j < length; j++)
-                {
-                    if (tablero[i, j] > 0 && tablero[i, j] < 10 && jugador == 2) // Negras
-                    {
-                        cuadros.Add(new Cuadro(i, j, tablero[i, j]));
-                    }
-                    else if (tablero[i, j] > 10 && jugador == 1) // Blancas
-                    {
-                        cuadros.Add(new Cuadro(i, j, tablero[i, j]));
-                    }
-                }
-            }
-
-            return cuadros;
-        }
-
         public List<Nodo> obtenerNivel(Nodo nodo, int jugador)
         {
-            List<Cuadro> cuadros = obtenerCuadros(nodo.tablero, jugador);
+            List<Cuadro> cuadros = this.utilidad.obtenerCuadros(nodo.tablero, jugador);
 
             foreach (Cuadro cuadro in cuadros)
             {
-                if (cuadro.codigo == 1 || cuadro.codigo == 11) // Peones
+                switch (cuadro.codigo)
                 {
-                    nodo.hijos = agregarHijos(nodo.hijos, peon(nodo.tablero, jugador, cuadro.i, cuadro.j));
-                }
-                else if (cuadro.codigo == 2 || cuadro.codigo == 12) // Torres
-                {
-                    nodo.hijos = agregarHijos(nodo.hijos, torre(nodo.tablero, jugador, cuadro.i, cuadro.j));
-                }
-                else if (cuadro.codigo == 3 || cuadro.codigo == 13) // Caballos
-                {
-                    nodo.hijos = agregarHijos(nodo.hijos, caballo(nodo.tablero, jugador, cuadro.i, cuadro.j));
-                }
-                else if (cuadro.codigo == 4 || cuadro.codigo == 14) // Alfiles
-                {
-                    nodo.hijos = agregarHijos(nodo.hijos, alfil(nodo.tablero, jugador, cuadro.i, cuadro.j));
-                }
-                else if (cuadro.codigo == 5 || cuadro.codigo == 15) // Reina
-                {
-                    nodo.hijos = agregarHijos(nodo.hijos, reina(nodo.tablero, jugador, cuadro.i, cuadro.j));
-                }
-                else if (cuadro.codigo == 6 || cuadro.codigo == 16) // Rey
-                {
-                    nodo.hijos = agregarHijos(nodo.hijos, rey(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                    // Peones.
+                    case 1: case 11:
+                        nodo.hijos = agregarHijos(nodo.hijos, peon(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
+                    // Torres.
+                    case 2: case 12:
+                        nodo.hijos = agregarHijos(nodo.hijos, torre(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
+                    // Caballos.
+                    case 3: case 13:
+                        nodo.hijos = agregarHijos(nodo.hijos, caballo(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
+                    // Alfiles.
+                    case 4: case 14:
+                        nodo.hijos = agregarHijos(nodo.hijos, alfil(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
+                    // Reina.
+                    case 5: case 15:
+                        nodo.hijos = agregarHijos(nodo.hijos, reina(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
+                    // Rey.
+                    case 6: case 16:
+                        nodo.hijos = agregarHijos(nodo.hijos, rey(nodo.tablero, jugador, cuadro.i, cuadro.j));
+                        break;
                 }
             }
 
@@ -1011,6 +1047,7 @@ namespace Chess.Clases
             jugador = jugador % 2 + 1;
             foreach (Nodo hijo in nodo.hijos)
             {
+                hijo.utilidad = utilidad.obtener(hijo.tablero, jugador % 2 + 1);
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
             }            
         }

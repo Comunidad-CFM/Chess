@@ -31,11 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(index));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mejorJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jugadorActual = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ganador = new System.Windows.Forms.PictureBox();
             this.grupoGanador = new System.Windows.Forms.GroupBox();
-            this.mejorJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -56,6 +58,12 @@
             resources.ApplyResources(this.archivoToolStripMenuItem, "archivoToolStripMenuItem");
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.reset);
+            // 
+            // mejorJugadaToolStripMenuItem
+            // 
+            resources.ApplyResources(this.mejorJugadaToolStripMenuItem, "mejorJugadaToolStripMenuItem");
+            this.mejorJugadaToolStripMenuItem.Name = "mejorJugadaToolStripMenuItem";
+            this.mejorJugadaToolStripMenuItem.Click += new System.EventHandler(this.mejorJugada);
             // 
             // jugadorActual
             // 
@@ -85,17 +93,23 @@
             this.grupoGanador.Name = "grupoGanador";
             this.grupoGanador.TabStop = false;
             // 
-            // mejorJugadaToolStripMenuItem
+            // label1
             // 
-            resources.ApplyResources(this.mejorJugadaToolStripMenuItem, "mejorJugadaToolStripMenuItem");
-            this.mejorJugadaToolStripMenuItem.Name = "mejorJugadaToolStripMenuItem";
-            this.mejorJugadaToolStripMenuItem.Click += new System.EventHandler(this.mejorJugada);
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // index
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.grupoGanador);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -122,6 +136,8 @@
         private System.Windows.Forms.PictureBox ganador;
         private System.Windows.Forms.GroupBox grupoGanador;
         private System.Windows.Forms.ToolStripMenuItem mejorJugadaToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
 
 
 

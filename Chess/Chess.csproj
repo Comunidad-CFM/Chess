@@ -47,6 +47,7 @@
     <Compile Include="Clases\Arbol.cs" />
     <Compile Include="Clases\Cuadro.cs" />
     <Compile Include="Clases\Nodo.cs" />
+    <Compile Include="Clases\Utilidad.cs" />
     <Compile Include="index.cs">
       <SubType>Form</SubType>
     </Compile>
