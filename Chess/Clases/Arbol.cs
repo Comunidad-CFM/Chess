@@ -1012,23 +1012,7 @@ namespace Chess.Clases
             foreach (Nodo hijo in nodo.hijos)
             {
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
-            }
-
-            /*if (profundidad == 1) 
-                return;
-            nodo.hijos = obtenerNivel(nodo, jugador);
-
-            jugador = jugador % 2 + 1;
-            foreach (Nodo hijo in nodo.hijos)
-            {
-                hijo.hijos = obtenerNivel(hijo, jugador);
-
-                foreach (Nodo subHijo in hijo.hijos)
-                {
-                    arbolDeJugadas(subHijo, jugador % 2 + 1, profundidad - 1);
-                }
-            }*/
-            
+            }            
         }
     }
 }

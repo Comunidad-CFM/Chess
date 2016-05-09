@@ -28,8 +28,6 @@ namespace Chess
         {
             InitializeComponent();
             prepararTableros();
-            arbol = new Arbol(table);
-            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 3);
 
             // Para las blancas
             // 11: Peon
@@ -1207,6 +1205,12 @@ namespace Chess
         private void reset(object sender, EventArgs e)
         {
             prepararTableros();
+        }
+
+        private void mejorJugada(object sender, EventArgs e)
+        {
+            arbol = new Arbol(table);
+            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 3);
         }
     }
 }

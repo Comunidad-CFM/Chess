@@ -17,8 +17,6 @@ namespace Chess.Clases
             this.utilidad = -1;
             this.hijos = new List<Nodo>();
             this.tablero = tablero;
-
-
         }
     }
 }

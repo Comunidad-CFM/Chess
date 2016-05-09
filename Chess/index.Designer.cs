@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(index));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.jugadorActual = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ganador = new System.Windows.Forms.PictureBox();
             this.grupoGanador = new System.Windows.Forms.GroupBox();
+            this.mejorJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -46,7 +46,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
+            this.archivoToolStripMenuItem,
+            this.mejorJugadaToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -56,12 +57,6 @@
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.reset);
             // 
-            // groupBox2
-            // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
             // jugadorActual
             // 
             resources.ApplyResources(this.jugadorActual, "jugadorActual");
@@ -70,6 +65,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.jugadorActual);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
@@ -83,10 +79,17 @@
             // 
             // grupoGanador
             // 
+            this.grupoGanador.BackColor = System.Drawing.Color.White;
             this.grupoGanador.Controls.Add(this.ganador);
             resources.ApplyResources(this.grupoGanador, "grupoGanador");
             this.grupoGanador.Name = "grupoGanador";
             this.grupoGanador.TabStop = false;
+            // 
+            // mejorJugadaToolStripMenuItem
+            // 
+            resources.ApplyResources(this.mejorJugadaToolStripMenuItem, "mejorJugadaToolStripMenuItem");
+            this.mejorJugadaToolStripMenuItem.Name = "mejorJugadaToolStripMenuItem";
+            this.mejorJugadaToolStripMenuItem.Click += new System.EventHandler(this.mejorJugada);
             // 
             // index
             // 
@@ -94,7 +97,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.grupoGanador);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -115,11 +117,11 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox jugadorActual;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox ganador;
         private System.Windows.Forms.GroupBox grupoGanador;
+        private System.Windows.Forms.ToolStripMenuItem mejorJugadaToolStripMenuItem;
 
 
 
