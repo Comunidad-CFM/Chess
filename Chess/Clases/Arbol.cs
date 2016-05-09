@@ -1004,16 +1004,31 @@ namespace Chess.Clases
 
         public void arbolDeJugadas(Nodo nodo, int jugador, int profundidad) 
         {
-            if (profundidad == 3) 
+            if (profundidad == 0)
                 return;
             nodo.hijos = obtenerNivel(nodo, jugador);
 
             jugador = jugador % 2 + 1;
-            foreach (Nodo hijo in this.raiz.hijos)
+            foreach (Nodo hijo in nodo.hijos)
+            {
+                arbolDeJugadas(hijo, jugador, profundidad - 1);
+            }
+
+            /*if (profundidad == 1) 
+                return;
+            nodo.hijos = obtenerNivel(nodo, jugador);
+
+            jugador = jugador % 2 + 1;
+            foreach (Nodo hijo in nodo.hijos)
             {
                 hijo.hijos = obtenerNivel(hijo, jugador);
-                arbolDeJugadas(hijo, jugador % 2 + 1, profundidad + 1);
-            }
+
+                foreach (Nodo subHijo in hijo.hijos)
+                {
+                    arbolDeJugadas(subHijo, jugador % 2 + 1, profundidad - 1);
+                }
+            }*/
+            
         }
     }
 }

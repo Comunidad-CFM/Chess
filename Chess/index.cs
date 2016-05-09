@@ -29,7 +29,7 @@ namespace Chess
             InitializeComponent();
             prepararTableros();
             arbol = new Arbol(table);
-            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 1);
+            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 3);
 
             // Para las blancas
             // 11: Peon
