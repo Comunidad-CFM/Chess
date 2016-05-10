@@ -13,11 +13,13 @@ namespace Chess.Clases
         int utilidadMin = -10000,
             utilidadMax = 10000;
         Utilidad utilidad;
+        Evaluacion evaluacion;
 
         public Arbol(int[,] tablero) 
         {
             this.raiz = new Nodo(tablero, -1);
             this.utilidad = new Utilidad();
+            this.evaluacion = new Evaluacion();
         }
 
         public Nodo mejorJugada(Nodo raiz, Boolean Player)
@@ -90,26 +92,32 @@ namespace Chess.Clases
             {
                 // Peon blanco.
                 case 1:
-                    // Hacia la izquierda arriba.
+                    // Hacia la arriba-izquierda.
                     if (j - 1 >= 0 && i - 1 >= 0)
                     {
                         if (tablero[i - 1, j - 1] < 10 && tablero[i - 1, j - 1] != 0)
                             tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j - 1), i, j, i - 1, j - 1));
                     }
                     // Hacia arriba 1.
-                    if (tablero[i - 1, j] == 0)
+                    if (i - 1 >= 0)
                     {
-                        tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
-
-                        // Hacia arriba 2.
-                        if (i == 6)
+                        if (tablero[i - 1, j] == 0)
                         {
-                            if (tablero[i - 2, j] == 0)
-                                tableros.Add(obtenerTablero(tablero, i, j, i - 2, j));
+                            tableros.Add(obtenerTablero(tablero, i, j, i - 1, j));
+
+                            // Hacia arriba 2.
+                            if (i == 6)
+                            {
+                                if (i - 2 >= 0)
+                                {
+                                    if (tablero[i - 2, j] == 0)
+                                        tableros.Add(obtenerTablero(tablero, i, j, i - 2, j));
+                                }
+                            }
                         }
                     }
                     // Hacia la derecha arriba.
-                    if (j + 1 < 8)
+                    if (j + 1 < 8 && i - 1 >= 0)
                     {
                         if (tablero[i - 1, j + 1] < 10 && tablero[i - 1, j + 1] != 0)
                             tableros.Add(obtenerTablero(limpiarCuadro(tablero, i - 1, j + 1), i, j, i - 1, j + 1));
@@ -118,21 +126,27 @@ namespace Chess.Clases
                 // Peon negro.
                 case 2:
                     // Hacia abajo-izquierda.
-                    if (j - 1 >= 0)
+                    if (j - 1 >= 0 && i + 1 < 8)
                     {
                         if (tablero[i + 1, j - 1] > 10)
                             tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j - 1), i, j, i + 1, j - 1));
                     }
                     // Hacia abajo 1
-                    if (tablero[i + 1, j] == 0)
+                    if (i + 1 < 8)
                     {
-                        tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
-
-                        // Hacia abajo 2
-                        if (i == 1)
+                        if (tablero[i + 1, j] == 0)
                         {
-                            if (tablero[i + 2, j] == 0)
-                                tableros.Add(obtenerTablero(tablero, i, j, i + 2, j));
+                            tableros.Add(obtenerTablero(tablero, i, j, i + 1, j));
+
+                            // Hacia abajo 2
+                            if (i == 1)
+                            {
+                                if (i + 2 < 8)
+                                {
+                                    if (tablero[i + 2, j] == 0)
+                                        tableros.Add(obtenerTablero(tablero, i, j, i + 2, j));
+                                }
+                            }
                         }
                     }
                     // Hacia abajo-derecha
@@ -1049,7 +1063,8 @@ namespace Chess.Clases
             jugador = jugador % 2 + 1;
             foreach (Nodo hijo in nodo.hijos)
             {
-                hijo.utilidad = utilidad.obtener(hijo.tablero, jugador % 2 + 1);
+                //hijo.utilidad = utilidad.obtener(hijo.tablero, jugador % 2 + 1);
+                hijo.utilidad = evaluacion.obtener(hijo.tablero);
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
             }            
         }
