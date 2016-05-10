@@ -121,24 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="archivoToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Unicode MS, 11.25pt</value>
-  </data>
-  <data name="archivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 24</value>
-  </data>
-  <data name="archivoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nuevo juego</value>
-  </data>
-  <data name="mejorJugadaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Unicode MS, 11.25pt</value>
-  </data>
-  <data name="mejorJugadaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 24</value>
-  </data>
-  <data name="mejorJugadaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mejor jugada</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -162,7 +144,25 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
+  </data>
+  <data name="archivoToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="archivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 24</value>
+  </data>
+  <data name="archivoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nuevo juego</value>
+  </data>
+  <data name="mejorJugadaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="mejorJugadaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="mejorJugadaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mejor jugada</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="jugadorActual.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -196,7 +196,7 @@
     <value>480, 43</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 87</value>
+    <value>120, 87</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -214,61 +214,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="ganador.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ganador.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 24</value>
-  </data>
-  <data name="ganador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 50</value>
-  </data>
-  <data name="ganador.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ganador.Name" xml:space="preserve">
-    <value>ganador</value>
-  </data>
-  <data name="&gt;&gt;ganador.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ganador.Parent" xml:space="preserve">
-    <value>grupoGanador</value>
-  </data>
-  <data name="&gt;&gt;ganador.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="grupoGanador.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Unicode MS, 11.25pt</value>
-  </data>
-  <data name="grupoGanador.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 155</value>
-  </data>
-  <data name="grupoGanador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 87</value>
-  </data>
-  <data name="grupoGanador.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grupoGanador.Text" xml:space="preserve">
-    <value>El ganador es</value>
-  </data>
-  <data name="grupoGanador.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;grupoGanador.Name" xml:space="preserve">
-    <value>grupoGanador</value>
-  </data>
-  <data name="&gt;&gt;grupoGanador.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grupoGanador.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grupoGanador.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -331,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -364,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -430,7 +376,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -463,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -496,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,7 +475,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -562,7 +508,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -595,7 +541,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -628,7 +574,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -661,7 +607,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -694,7 +640,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -727,7 +673,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -760,7 +706,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -793,6 +739,123 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="duracion.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="duracion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 30</value>
+  </data>
+  <data name="duracion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
+  </data>
+  <data name="duracion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;duracion.Name" xml:space="preserve">
+    <value>duracion</value>
+  </data>
+  <data name="&gt;&gt;duracion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;duracion.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;duracion.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 158</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 67</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Duración (ms)</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ganador.Name" xml:space="preserve">
+    <value>ganador</value>
+  </data>
+  <data name="&gt;&gt;ganador.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ganador.Parent" xml:space="preserve">
+    <value>grupoGanador</value>
+  </data>
+  <data name="&gt;&gt;ganador.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grupoGanador.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="grupoGanador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 248</value>
+  </data>
+  <data name="grupoGanador.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 87</value>
+  </data>
+  <data name="grupoGanador.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="grupoGanador.Text" xml:space="preserve">
+    <value>El ganador es</value>
+  </data>
+  <data name="grupoGanador.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grupoGanador.Name" xml:space="preserve">
+    <value>grupoGanador</value>
+  </data>
+  <data name="&gt;&gt;grupoGanador.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grupoGanador.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grupoGanador.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ganador.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ganador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 24</value>
+  </data>
+  <data name="ganador.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 50</value>
+  </data>
+  <data name="ganador.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ganador.Name" xml:space="preserve">
+    <value>ganador</value>
+  </data>
+  <data name="&gt;&gt;ganador.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ganador.Parent" xml:space="preserve">
+    <value>grupoGanador</value>
+  </data>
+  <data name="&gt;&gt;ganador.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

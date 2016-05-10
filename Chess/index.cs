@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Chess
         Pieza[,] tablero;
         Arbol arbol;
         Nodo nodo;
+        Stopwatch timer;
         int I, J;
         bool move_QB = true;
         bool move_RB = true;
@@ -1211,8 +1213,12 @@ namespace Chess
         private void mejorJugada(object sender, EventArgs e)
         {
             arbol = new Arbol(table);
+            timer = Stopwatch.StartNew();
             arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
             nodo = arbol.mejorJugada(arbol.raiz, true);
+            timer.Stop();
+
+            duracion.Text = timer.ElapsedMilliseconds.ToString();
 
             table = nodo.tablero;
             dibujar();
