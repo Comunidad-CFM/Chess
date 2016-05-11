@@ -51,15 +51,19 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.duracion = new System.Windows.Forms.TextBox();
             this.grupoGanador = new System.Windows.Forms.GroupBox();
             this.ganador = new System.Windows.Forms.PictureBox();
-            this.duracion = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioAlphaBeta = new System.Windows.Forms.RadioButton();
+            this.radioMiniMax = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grupoGanador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ganador)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -183,6 +187,13 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // duracion
+            // 
+            this.duracion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.duracion, "duracion");
+            this.duracion.Name = "duracion";
+            this.duracion.ReadOnly = true;
+            // 
             // grupoGanador
             // 
             this.grupoGanador.BackColor = System.Drawing.Color.White;
@@ -197,18 +208,36 @@
             this.ganador.Name = "ganador";
             this.ganador.TabStop = false;
             // 
-            // duracion
+            // groupBox3
             // 
-            this.duracion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.duracion, "duracion");
-            this.duracion.Name = "duracion";
-            this.duracion.ReadOnly = true;
+            this.groupBox3.Controls.Add(this.radioMiniMax);
+            this.groupBox3.Controls.Add(this.radioAlphaBeta);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // radioAlphaBeta
+            // 
+            resources.ApplyResources(this.radioAlphaBeta, "radioAlphaBeta");
+            this.radioAlphaBeta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioAlphaBeta.Name = "radioAlphaBeta";
+            this.radioAlphaBeta.TabStop = true;
+            this.radioAlphaBeta.UseVisualStyleBackColor = true;
+            // 
+            // radioMiniMax
+            // 
+            resources.ApplyResources(this.radioMiniMax, "radioMiniMax");
+            this.radioMiniMax.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioMiniMax.Name = "radioMiniMax";
+            this.radioMiniMax.TabStop = true;
+            this.radioMiniMax.UseVisualStyleBackColor = true;
             // 
             // index
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grupoGanador);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label16);
@@ -240,6 +269,8 @@
             this.groupBox2.PerformLayout();
             this.grupoGanador.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ganador)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,6 +303,9 @@
         private System.Windows.Forms.TextBox duracion;
         private System.Windows.Forms.GroupBox grupoGanador;
         private System.Windows.Forms.PictureBox ganador;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioMiniMax;
+        private System.Windows.Forms.RadioButton radioAlphaBeta;
 
 
 

@@ -9,59 +9,19 @@ namespace Chess.Clases
     class Arbol
     {
         public Nodo raiz;
-        public bool max = true;
-        int utilidadMin = -10000,
-            utilidadMax = 10000;
         Utilidad utilidad;
         Evaluacion evaluacion;
+        Evaluation evaluation;
 
         public Arbol(int[,] tablero) 
         {
-            this.raiz = new Nodo(tablero, -1);
+            this.raiz = new Nodo(tablero, -100000);
             this.utilidad = new Utilidad();
             this.evaluacion = new Evaluacion();
+            this.evaluation = new Evaluation();
         }
 
-        public Nodo mejorJugada(Nodo raiz, Boolean Player)
-        {
-            if (raiz.hijos.Count == 0)
-            {
-                return raiz;
-            }
-
-            if (Player == max)
-            {
-                Nodo hijoAlpha = new Nodo(this.raiz.tablero, utilidadMin);
-                Nodo hijoAlpha2;
-                foreach (Nodo hijo in raiz.hijos)
-                {
-                    hijoAlpha2 = mejorJugada(hijo, !Player);
-                    if (hijoAlpha2.utilidad > hijoAlpha.utilidad)
-                    {
-                        hijoAlpha = hijoAlpha2;
-                        hijoAlpha.tablero = hijo.tablero;
-                    }
-                }
-
-                return hijoAlpha;
-            }
-            else
-            {
-                Nodo hijoBeta = new Nodo(this.raiz.tablero, utilidadMax);
-                Nodo hijoBeta2;
-                foreach (Nodo hijo in raiz.hijos)
-                {
-                    hijoBeta2 = mejorJugada(hijo, !Player);
-                    if (hijoBeta2.utilidad < hijoBeta.utilidad)
-                    {
-                        hijoBeta = hijoBeta2;
-                        hijoBeta.tablero = hijo.tablero;
-                    }
-                }
-
-                return hijoBeta;
-            }
-        }
+        
 
         public int[,] limpiarCuadro(int[,] tablero, int i, int j)
         {
@@ -150,7 +110,7 @@ namespace Chess.Clases
                         }
                     }
                     // Hacia abajo-derecha
-                    if (j + 1 < 8)
+                    if (j + 1 < 8 && i + 1 < 8)
                     {
                         if (tablero[i + 1, j + 1] > 10)
                             tableros.Add(obtenerTablero(limpiarCuadro(tablero, i + 1, j + 1), i, j, i + 1, j + 1));
@@ -1064,7 +1024,8 @@ namespace Chess.Clases
             foreach (Nodo hijo in nodo.hijos)
             {
                 //hijo.utilidad = utilidad.obtener(hijo.tablero, jugador % 2 + 1);
-                hijo.utilidad = evaluacion.obtener(hijo.tablero);
+                //hijo.utilidad = evaluacion.obtener(hijo.tablero);
+                hijo.utilidad = evaluation.EvaluateBoardScore(hijo.tablero) + evaluation.utilidad(hijo.tablero, jugador % 2 + 1);
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
             }            
         }

@@ -14,18 +14,21 @@ namespace Chess
 {
     public partial class index : Form
     {
-        int[,] table;
-        int[,] bits;
+        int[,] table,
+               bits;
         Pieza[,] tablero;
         Arbol arbol;
         Nodo nodo;
+        MiniMax miniMax;
+        AlphaBeta alphaBeta;
         Stopwatch timer;
-        int I, J;
-        bool move_QB = true;
-        bool move_RB = true;
-        bool move_QW = true;
-        bool move_RW = true;
-        int turnoActual = 1;
+        int I, 
+            J,
+            turnoActual = 1;
+        bool move_QB = true,
+             move_RB = true,
+             move_QW = true,
+             move_RW = true;
 
         public index()
         {
@@ -75,16 +78,27 @@ namespace Chess
         {
             this.tablero = new Pieza[8, 8];
             this.bits = new int[8, 8];
+            //this.table = new int[8, 8]
+            //{
+            //    {02, 03, 04, 05, 06, 04, 03, 02},
+            //    {01, 01, 01, 01, 01, 01, 01, 01},
+            //    {00, 00, 00, 00, 00, 00, 00, 00},
+            //    {00, 00, 00, 00, 00, 00, 00, 00},
+            //    {00, 00, 00, 00, 00, 00, 00, 00},
+            //    {00, 00, 00, 00, 00, 00, 00, 00},
+            //    {11, 11, 11, 11, 11, 11, 11, 11},
+            //    {12, 13, 14, 15, 16, 14, 13, 12},
+            //};
             this.table = new int[8, 8]
             {
                 {02, 03, 04, 05, 06, 04, 03, 02},
-                {01, 01, 01, 01, 01, 01, 01, 01},
+                {01, 01, 01, 00, 01, 01, 00, 01},
                 {00, 00, 00, 00, 00, 00, 00, 00},
+                {00, 00, 00, 00, 00, 00, 01, 00},
                 {00, 00, 00, 00, 00, 00, 00, 00},
-                {00, 00, 00, 00, 00, 00, 00, 00},
-                {00, 00, 00, 00, 00, 00, 00, 00},
+                {00, 00, 00, 00, 00, 13, 00, 00},
                 {11, 11, 11, 11, 11, 11, 11, 11},
-                {12, 13, 14, 15, 16, 14, 13, 12},
+                {12, 13, 14, 15, 16, 14, 00, 12},
             };
         }
 
@@ -1212,11 +1226,14 @@ namespace Chess
 
         private void mejorJugada(object sender, EventArgs e)
         {
-            arbol = new Arbol(table);
-            timer = Stopwatch.StartNew();
-            arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
-            nodo = arbol.mejorJugada(arbol.raiz, true);
-            timer.Stop();
+            this.miniMax = new MiniMax();
+            this.alphaBeta = new AlphaBeta();
+            this.arbol = new Arbol(table);
+            this.timer = Stopwatch.StartNew();
+            this.arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
+            //this.nodo = this.miniMax.miniMax(arbol.raiz);
+            this.nodo = this.alphaBeta.alphaBeta(arbol.raiz);
+            this.timer.Stop();
 
             duracion.Text = timer.ElapsedMilliseconds.ToString();
 
@@ -1224,6 +1241,8 @@ namespace Chess
             dibujar();
             cambiarTurno();
             setJugadorActual();
+
+
         }
     }
 }
