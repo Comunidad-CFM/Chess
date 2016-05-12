@@ -35,6 +35,7 @@ namespace Chess
             InitializeComponent();
             prepararTableros();
 
+
             // Para las blancas
             // 11: Peon
             // 12: Torre
@@ -78,27 +79,16 @@ namespace Chess
         {
             this.tablero = new Pieza[8, 8];
             this.bits = new int[8, 8];
-            //this.table = new int[8, 8]
-            //{
-            //    {02, 03, 04, 05, 06, 04, 03, 02},
-            //    {01, 01, 01, 01, 01, 01, 01, 01},
-            //    {00, 00, 00, 00, 00, 00, 00, 00},
-            //    {00, 00, 00, 00, 00, 00, 00, 00},
-            //    {00, 00, 00, 00, 00, 00, 00, 00},
-            //    {00, 00, 00, 00, 00, 00, 00, 00},
-            //    {11, 11, 11, 11, 11, 11, 11, 11},
-            //    {12, 13, 14, 15, 16, 14, 13, 12},
-            //};
             this.table = new int[8, 8]
             {
                 {02, 03, 04, 05, 06, 04, 03, 02},
-                {01, 01, 01, 00, 01, 01, 00, 01},
+                {01, 01, 01, 01, 01, 01, 01, 01},
                 {00, 00, 00, 00, 00, 00, 00, 00},
-                {00, 00, 00, 00, 00, 00, 01, 00},
                 {00, 00, 00, 00, 00, 00, 00, 00},
-                {00, 00, 00, 00, 00, 13, 00, 00},
+                {00, 00, 00, 00, 00, 00, 00, 00},
+                {00, 00, 00, 00, 00, 00, 00, 00},
                 {11, 11, 11, 11, 11, 11, 11, 11},
-                {12, 13, 14, 15, 16, 14, 00, 12},
+                {12, 13, 14, 15, 16, 14, 13, 12},
             };
         }
 
@@ -1226,23 +1216,30 @@ namespace Chess
 
         private void mejorJugada(object sender, EventArgs e)
         {
-            this.miniMax = new MiniMax();
-            this.alphaBeta = new AlphaBeta();
             this.arbol = new Arbol(table);
             this.timer = Stopwatch.StartNew();
             this.arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
-            //this.nodo = this.miniMax.miniMax(arbol.raiz);
-            this.nodo = this.alphaBeta.alphaBeta(arbol.raiz);
+
+            if (radioAlphaBeta.Checked)
+            {
+                this.alphaBeta = new AlphaBeta();
+                this.nodo = this.alphaBeta.alphaBeta(arbol.raiz);
+            }
+            else
+            {
+                this.miniMax = new MiniMax();
+                this.nodo = this.miniMax.miniMax(arbol.raiz);
+            }
+            
             this.timer.Stop();
 
             duracion.Text = timer.ElapsedMilliseconds.ToString();
 
             table = nodo.tablero;
             dibujar();
+            // Validar si falta algún rey.
             cambiarTurno();
             setJugadorActual();
-
-
         }
     }
 }

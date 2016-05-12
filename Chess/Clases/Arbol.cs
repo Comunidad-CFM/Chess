@@ -9,19 +9,36 @@ namespace Chess.Clases
     class Arbol
     {
         public Nodo raiz;
-        Utilidad utilidad;
-        Evaluacion evaluacion;
         Evaluation evaluation;
 
         public Arbol(int[,] tablero) 
         {
             this.raiz = new Nodo(tablero, -100000);
-            this.utilidad = new Utilidad();
-            this.evaluacion = new Evaluacion();
             this.evaluation = new Evaluation();
         }
 
-        
+        public List<Cuadro> obtenerCuadros(int[,] tablero, int jugador)
+        {
+            List<Cuadro> cuadros = new List<Cuadro>();
+            int i, j, length = 8;
+
+            for (i = 0; i < length; i++)
+            {
+                for (j = 0; j < length; j++)
+                {
+                    if (tablero[i, j] > 0 && tablero[i, j] < 10 && jugador == 2) // Negras
+                    {
+                        cuadros.Add(new Cuadro(i, j, tablero[i, j]));
+                    }
+                    else if (tablero[i, j] > 10 && jugador == 1) // Blancas
+                    {
+                        cuadros.Add(new Cuadro(i, j, tablero[i, j]));
+                    }
+                }
+            }
+
+            return cuadros;
+        }
 
         public int[,] limpiarCuadro(int[,] tablero, int i, int j)
         {
@@ -189,7 +206,6 @@ namespace Chess.Clases
                                 break;
                             else
                             {
-                                tablero[i, c] = 00;
                                 tableros.Add(obtenerTablero(limpiarCuadro(tablero, i, c), i, j, i, c));
                                 break;
                             }
@@ -978,7 +994,7 @@ namespace Chess.Clases
 
         public List<Nodo> obtenerNivel(Nodo nodo, int jugador)
         {
-            List<Cuadro> cuadros = this.utilidad.obtenerCuadros(nodo.tablero, jugador);
+            List<Cuadro> cuadros = this.obtenerCuadros(nodo.tablero, jugador);
 
             foreach (Cuadro cuadro in cuadros)
             {
@@ -1023,9 +1039,7 @@ namespace Chess.Clases
             jugador = jugador % 2 + 1;
             foreach (Nodo hijo in nodo.hijos)
             {
-                //hijo.utilidad = utilidad.obtener(hijo.tablero, jugador % 2 + 1);
-                //hijo.utilidad = evaluacion.obtener(hijo.tablero);
-                hijo.utilidad = evaluation.EvaluateBoardScore(hijo.tablero) + evaluation.utilidad(hijo.tablero, jugador % 2 + 1);
+                hijo.utilidad = evaluation.utilidad(nodo.tablero, jugador % 2 + 1);
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
             }            
         }

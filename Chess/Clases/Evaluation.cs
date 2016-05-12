@@ -8,12 +8,18 @@ namespace Chess.Clases
 {
     class Evaluation
     {
-        public int peon = 100,
-                   caballo = 320,
-                   alfil = 325,
-                   torre = 500,
-                   reina = 975,
-                   rey = 32767;
+        //public int peon = 100,
+        //           caballo = 320,
+        //           alfil = 325,
+        //           torre = 500,
+        //           reina = 975,
+        //           rey = 32767;
+        public double peon = 0.1,
+                      caballo = 0.2,
+                      alfil = 0.3,
+                      torre = 0.4,
+                      reina = 0.5,
+                      rey = 0.6;
         public int peonValor = 1,
                    alfilValor = 3,
                    caballoValor = 3,
@@ -79,7 +85,8 @@ namespace Chess.Clases
         public Evaluation()
         { }
 
-        public int utilidad(int[,] tablero, int jugador) 
+        #region Heuristica por valor de la pieza.
+        public double valorPosicion(int[,] tablero) 
         {
             int i,
                 j,
@@ -142,44 +149,39 @@ namespace Chess.Clases
                 }
             }
 
-            if (jugador == 1) // Blancas.
-            {
-                return (peonesBlancos - peonesNegros) + (3 * (caballosBlancos - caballosNegros)) + (3 * (alfilesBlancos - alfilesNegros)) + (5 * (torresBlancas - torresNegras)) + (9 * (reinaBlanca - reinaNegra));
-            }
-            else // Negras.
-            {
-                return (peonesNegros - peonesBlancos) + (3 * (caballosNegros - caballosBlancos)) + (3 * (alfilesNegros - alfilesBlancos)) + (5 * (torresNegras - torresBlancas)) + (9 * (reinaNegra - reinaBlanca));            
-            }
+            return (peonesBlancos - peonesNegros) + (3 * (caballosBlancos - caballosNegros)) + (((alfilesBlancos == 2 ? 3.25 : 3) * alfilesBlancos) - ((alfilesNegros == 2 ? 3.25 : 3) * alfilesNegros)) + (5 * (torresBlancas - torresNegras)) + (9 * (reinaBlanca - reinaNegra));
         }
- 
-        public int valorPieza(int codigo) 
+        #endregion
+
+        #region Heuristica por valor de la posicion.
+        public double valorPieza(int codigo) 
         {
-            int valor = 0;
+            double valor = 0;
             switch (codigo) 
             {
                 // Peones.
                 case 1: case 11:
-                    valor = this.peon;
+                    valor = peon;
                     break;
                 // Torres.
                 case 2: case 12:
-                    valor = this.torre;
+                    valor = torre;
                     break;
                 // Caballos.
                 case 3: case 13:
-                    valor = this.caballo;
+                    valor = caballo;
                     break;
                 // Alfiles.
                 case 4: case 14:
-                    valor = this.alfil;
+                    valor = alfil;
                     break;
                 // Reina.
                 case 5: case 15:
-                    valor = this.reina;
+                    valor = reina;
                     break;
                 // Rey.
                 case 6: case 16:
-                    valor = this.rey;
+                    valor = rey;
                     break;
             }
 
@@ -205,9 +207,9 @@ namespace Chess.Clases
             return count;
         }
 
-        public int EvaluatePieceScore(Cuadro cuadro, bool endGamePhase, ref byte bishopCount, ref bool insufficientMaterial)
+        public double EvaluatePieceScore(Cuadro cuadro, bool endGamePhase, ref byte bishopCount, ref bool insufficientMaterial)
         {
-            int score = 0;
+            double score = 0;
             byte index = (byte)(cuadro.i * 8 + cuadro.j);
 
             // If whites.
@@ -283,9 +285,9 @@ namespace Chess.Clases
             return score;
         }
 
-        public int EvaluateBoardScore(int[,] tablero) 
+        public double EvaluateBoardScore(int[,] tablero) 
         {
-            int utilidad = 0;
+            double utilidad = 0;
             bool insufficientMaterial = true,
                 endGamephase = (isEndGamePhase(tablero) <= 10 ? true : false);
 
@@ -303,7 +305,6 @@ namespace Chess.Clases
                 for (j = 0; j < length; j++)
                 {
                     Cuadro cuadro = new Cuadro(i, j, tablero[i, j]);
-                    //Square square = board.Squares[x];
                     if (cuadro.codigo == 0)
                         continue;
 
@@ -337,6 +338,1020 @@ namespace Chess.Clases
             }
 
             return utilidad;
+        }
+        #endregion
+
+        #region Heuristica por cantidad de casillas movibles.
+        public int jugadasBlancas(int[,] tablero, int i, int j)
+        {
+            int jugadas = 0, c;
+            switch (tablero[i, j])
+            {
+                // Torre.
+                case 12:
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                // Caballo.
+                case 13:
+                    // Hacia arriba.
+                    if (i - 2 >= 0)
+                    {
+                        // Izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i - 2, j - 1] < 10)
+                                jugadas++;
+                        }
+                        // Derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i - 2, j + 1] < 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia abajo.
+                    if (i + 2 < 8)
+                    {
+                        // Izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i + 2, j - 1] < 10)
+                                jugadas++;
+                        }
+                        // Derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i + 2, j + 1] < 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia la izquierda.
+                    if (j - 2 >= 0)
+                    {
+                        // Arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j - 2] < 10)
+                                jugadas++;
+                        }
+                        // Derecha.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j - 2] < 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia la derecha.
+                    if (j + 2 < 8)
+                    {
+                        // Arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j + 2] < 10)
+                                jugadas++;
+                        }
+                        // Abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j + 2] < 10)
+                                jugadas++;
+                        }
+                    }
+                    break;
+                // Alfil.
+                case 14:
+                    // Hacia arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo izquierda. 
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+                // Reina.
+                case 15:
+                    // Hacia arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j - c] < 10 && tablero[i - c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j + c] < 10 && tablero[i - c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j + c] < 10 && tablero[i + c, j + c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] < 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j - c] < 10 && tablero[i + c, j - c] != 0)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] > 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                // Rey.
+                case 16:
+                    // Hacia arriba.
+                    if (i - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j] == 0 || tablero[i - 1, j] < 10)
+                            jugadas++;
+                    }
+                    // Hacia arriba derecha.
+                    if (i - 1 >= 0 && j + 1 < 8)
+                    {
+                        if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] < 10)
+                            jugadas++;
+                    }
+                    // Hacia la derecha.
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] == 0 || tablero[i, j + 1] < 10)
+                            jugadas++;
+                    }
+                    // Hacia la derecha abajo.
+                    if (i + 1 < 8 && j + 1 < 8)
+                    {
+                        if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] < 10)
+                            jugadas++;
+                    }
+                    // Hacia abajo.
+                    if (i + 1 < 8)
+                    {
+                        if (tablero[i + 1, j] == 0 || tablero[i + 1, j] < 10)
+                            jugadas++;
+                    }
+                    // Hacia abajo izquierda.
+                    if (i + 1 < 8 && j - 1 >= 0)
+                    {
+                        if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] < 10)
+                            jugadas++;
+                    }
+                    // Hacia la izquierda.
+                    if (j - 1 >= 0)
+                    {
+                        if (tablero[i, j - 1] == 0 || tablero[i, j - 1] < 10)
+                            jugadas++;
+                    }
+                    // Hacia la arriba izquierda.
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] < 10)
+                            jugadas++;
+                    }
+                    break;
+            }
+
+            return jugadas;
+        }
+
+        public int jugadasNegras(int[,] tablero, int i, int j)
+        {
+            int jugadas = 0, c;
+            switch (tablero[i, j])
+            {
+                // Torre.
+                case 2:
+                    // Hacia arriba.
+                    for (c = i - 1; c > -1; c--)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] < 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia abajo.
+                    for (c = i + 1; c < 8; c++)
+                    {
+                        if (tablero[c, j] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[c, j] < 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la izquierda.
+                    for (c = j - 1; c > -1; c--)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] < 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    // Hacia la derecha.
+                    for (c = j + 1; c < 8; c++)
+                    {
+                        if (tablero[i, c] == 0)
+                            jugadas++;
+                        else
+                        {
+                            if (tablero[i, c] < 10)
+                                break;
+                            else
+                            {
+                                jugadas++;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                // Caballo.
+                case 3:
+                    // Hacia arriba.
+                    if (i - 2 >= 0)
+                    {
+                        // Hacia la izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i - 2, j - 1] == 0 || tablero[i - 2, j - 1] > 10)
+                                jugadas++;
+                        }
+                        // Hacia la derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i - 2, j + 1] == 0 || tablero[i - 2, j + 1] > 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia abajo.
+                    if (i + 2 < 8)
+                    {
+                        // Hacia la izquierda.
+                        if (j - 1 >= 0)
+                        {
+                            if (tablero[i + 2, j - 1] == 0 || tablero[i + 2, j - 1] > 10)
+                                jugadas++;
+                        }
+                        // Hacia la derecha.
+                        if (j + 1 < 8)
+                        {
+                            if (tablero[i + 2, j + 1] == 0 || tablero[i + 2, j + 1] > 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia la izquierda.
+                    if (j - 2 >= 0)
+                    {
+                        // Hacia arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j - 2] == 0 || tablero[i - 1, j - 2] > 10)
+                                jugadas++;
+                        }
+                        // Hacia abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j - 2] == 0 || tablero[i + 1, j - 2] > 10)
+                                jugadas++;
+                        }
+                    }
+                    // Hacia la derecha.
+                    if (j + 2 < 8)
+                    {
+                        // Hacia arriba.
+                        if (i - 1 >= 0)
+                        {
+                            if (tablero[i - 1, j + 2] == 0 || tablero[i - 1, j + 2] > 10)
+                                jugadas++;
+                        }
+                        // Hacia abajo.
+                        if (i + 1 < 8)
+                        {
+                            if (tablero[i + 1, j + 2] == 0 || tablero[i + 1, j + 2] > 10)
+                                jugadas++;
+                        }
+                    }
+                    break;
+                // Alfil.
+                case 4:
+                    // Arriba izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Arriba derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Abajo derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Abajo izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+                // Reina.
+                case 5:
+                    // Hacia la izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (j - c >= 0)
+                        {
+                            if (tablero[i, j - c] == 0 || tablero[i, j - c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia la derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (j + c < 8)
+                        {
+                            if (tablero[i, j + c] == 0 || tablero[i, j + c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0)
+                        {
+                            if (tablero[i - c, j] == 0 || tablero[i - c, j] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8)
+                        {
+                            if (tablero[i + c, j] == 0 || tablero[i + c, j] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba-izquierda
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j - c >= 0)
+                        {
+                            if (tablero[i - c, j - c] == 0 || tablero[i - c, j - c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia arriba-derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i - c >= 0 && j + c < 8)
+                        {
+                            if (tablero[i - c, j + c] == 0 || tablero[i - c, j + c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i - c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo-derecha.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j + c < 8)
+                        {
+                            if (tablero[i + c, j + c] == 0 || tablero[i + c, j + c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j + c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    // Hacia abajo-izquierda.
+                    for (c = 1; c < 8; c++)
+                    {
+                        if (i + c < 8 && j - c >= 0)
+                        {
+                            if (tablero[i + c, j - c] == 0 || tablero[i + c, j - c] > 10)
+                            {
+                                jugadas++;
+                                if (tablero[i + c, j - c] > 10)
+                                    break;
+                            }
+                            else
+                                break;
+                        }
+                        else
+                            break;
+                    }
+                    break;
+                // Rey.
+                case 6:
+                    // Hacia arriba.
+                    if (i - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j] == 0 || tablero[i - 1, j] > 10)
+                            jugadas++;
+                    }
+                    // Hacia arriba derecha
+                    if (i - 1 >= 0 && j + 1 < 8)
+                    {
+                        if (tablero[i - 1, j + 1] == 0 || tablero[i - 1, j + 1] > 10)
+                            jugadas++;
+                    }
+                    // Hacia la derecha.
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] == 0 || tablero[i, j + 1] > 10)
+                            jugadas++;
+                    }
+                    // Hacia abajo derecha.
+                    if (i + 1 < 8 && j + 1 < 8)
+                    {
+                        if (tablero[i + 1, j + 1] == 0 || tablero[i + 1, j + 1] > 10)
+                            jugadas++;
+                    }
+                    // Hacia abajo.
+                    if (i + 1 < 8)
+                    {
+                        if (tablero[i + 1, j] == 0 || tablero[i + 1, j] > 10)
+                            jugadas++;
+                    }
+                    // Hacia abajo izquierda.
+                    if (i + 1 < 8 && j - 1 >= 0)
+                    {
+                        if (tablero[i + 1, j - 1] == 0 || tablero[i + 1, j - 1] > 10)
+                            jugadas++;
+                    }
+                    // Hacia la izquierda.
+                    if (j - 1 >= 0)
+                    {
+                        if (tablero[i, j - 1] == 0 || tablero[i, j - 1] > 10)
+                            jugadas++;
+                    }
+                    // Hacia la izquierda arriba.
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j - 1] == 0 || tablero[i - 1, j - 1] > 10)
+                            jugadas++;
+                    }
+                    break;
+            }
+
+            return jugadas;
+        }
+
+        public double movimientos(int[,] tablero)
+        {
+            int i, j, length = 8, cantJugadasBlancas = 0, cantJugadasNegras = 0;
+
+            for (i = 0; i < length; i++)
+            {
+                for (j = 0; j < length; j++)
+                {
+                    if (tablero[i, j] < 10 && tablero[i, j] != 0) // Negras.
+                    {
+                        cantJugadasNegras += jugadasNegras(tablero, i, j);
+                    }
+                    else if (tablero[i, j] > 10) // Blancas.
+                    {
+                        cantJugadasBlancas += jugadasBlancas(tablero, i, j);
+                    }
+                }
+            }
+
+            return (cantJugadasBlancas * 0.1) - (cantJugadasNegras * 0.1);
+        }
+#endregion
+
+        #region Heuristica de defensa del rey.
+        public int[] buscarPieza(int[,] tablero, int codigo)
+        {
+            int[] posicion = new int[2];
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (tablero[i, j] == codigo)
+                    {
+                        posicion[0] = i;
+                        posicion[1] = j;
+                        return posicion;
+                    }
+                }
+            }
+            return posicion;
+        }
+        public double defensa(int[,] tablero, int i, int j)
+        {
+            double puntos = 0;
+            switch (tablero[i, j])
+            {
+                //negro
+                case 6:
+                    //izquierdo
+                    if (j - 1 >= 0)
+                    {
+                        if ((tablero[i, j - 1] < 10 || tablero[i, j - 1] != 0) || tablero[i, j - 1] == 11)
+                        {
+                            puntos += 0.2;
+                        }
+                        else
+                        {
+                            puntos -= 0.1;
+                        }
+                    }
+                    //abajo izquierda
+                    if (i + 1 < 8 && j - 1 >= 0)
+                    {
+                        if (tablero[i + 1, j - 1] < 10 || tablero[i + 1, j - 1] != 0)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            puntos -= 0.2;
+                        }
+                    }
+                    //arriba
+                    if (i + 1 < 8)
+                    {
+                        if ((tablero[i + 1, j] < 10 && tablero[i + 1, j] != 0) || tablero[i + 1, j] == 11)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            //arriba 2
+                            if (i + 2 < 8)
+                            {
+                                if ((tablero[i + 2, j] < 10 && tablero[i + 2, j] != 0) || tablero[i + 2, j] == 11)
+                                {
+                                    puntos += 0.1;
+                                }
+                                else
+                                {
+                                    puntos -= 0.2;
+                                }
+                            }
+                        }
+                    }
+                    //arriba derecha
+                    if (i + 1 < 8 && j + 1 < 8)
+                    {
+                        if (tablero[i + 1, j + 1] < 10 || tablero[i + 1, j + 1] != 0)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            puntos -= 0.2;
+                        }
+                    }
+                    //derecha
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] < 10 || tablero[i, j + 1] != 0)
+                        {
+                            puntos += 0.2;
+                        }
+                        else
+                        {
+                            puntos -= 0.1;
+                        }
+                    }
+                    break;
+                //blanco
+                case 16:
+                    //izquierdo
+                    if (j - 1 >= 0)
+                    {
+                        if (tablero[i, j - 1] > 10 || tablero[i, j - 1] == 01)
+                        {
+                            puntos += 0.2;
+                        }
+                        else
+                        {
+                            puntos -= 0.1;
+                        }
+                    }
+                    //arriba izquierda
+                    if (i - 1 >= 0 && j - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j - 1] > 10)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            puntos -= 0.2;
+                        }
+                    }
+                    //arriba
+                    if (i - 1 >= 0)
+                    {
+                        if (tablero[i - 1, j] > 10 || tablero[i - 1, j] == 01)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            //arriba 2
+                            if (i - 2 >= 0)
+                            {
+                                if (tablero[i - 2, j] > 10 || tablero[i - 2, j] == 01)
+                                {
+                                    puntos += 0.1;
+                                }
+                                else
+                                {
+                                    puntos -= 0.2;
+                                }
+                            }
+                        }
+                    }
+                    //arriba derecha
+                    if (i - 1 >= 0 && j + 1 < 8)
+                    {
+                        if (tablero[i - 1, j + 1] > 10)
+                        {
+                            puntos += 0.1;
+                        }
+                        else
+                        {
+                            puntos -= 0.2;
+                        }
+                    }
+                    //derecha
+                    if (j + 1 < 8)
+                    {
+                        if (tablero[i, j + 1] > 10 || tablero[i, j + 1] == 01)
+                        {
+                            puntos += 0.2;
+                        }
+                        else
+                        {
+                            puntos -= 0.1;
+                        }
+                    }
+                    break;
+            }
+
+            return puntos;
+        }
+        #endregion
+
+        public double utilidad(int[,] tablero, int jugador) 
+        {
+            int[] posicion = buscarPieza(tablero, (jugador == 1 ? 16 : 6));
+            return valorPosicion(tablero) + EvaluateBoardScore(tablero) + movimientos(tablero) + defensa(tablero, posicion[0], posicion[1]);
         }
     }
 }

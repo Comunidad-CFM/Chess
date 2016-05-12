@@ -50,11 +50,9 @@
     <Compile Include="Clases\AlphaBeta.cs" />
     <Compile Include="Clases\Arbol.cs" />
     <Compile Include="Clases\Cuadro.cs" />
-    <Compile Include="Clases\Evaluacion.cs" />
     <Compile Include="Clases\Evaluation.cs" />
     <Compile Include="Clases\MiniMax.cs" />
     <Compile Include="Clases\Nodo.cs" />
-    <Compile Include="Clases\Utilidad.cs" />
     <Compile Include="index.cs">
       <SubType>Form</SubType>
     </Compile>
