@@ -10,6 +10,7 @@ namespace Chess.Clases
     {
         public Nodo raiz;
         Evaluation evaluation;
+        public int cantidadJugadas = 0;
 
         public Arbol(int[,] tablero) 
         {
@@ -1035,6 +1036,7 @@ namespace Chess.Clases
             if (profundidad == 0)
                 return;
             nodo.hijos = obtenerNivel(nodo, jugador);
+            cantidadJugadas += nodo.hijos.Count;
 
             jugador = jugador % 2 + 1;
             foreach (Nodo hijo in nodo.hijos)

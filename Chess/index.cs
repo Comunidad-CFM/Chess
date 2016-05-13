@@ -1220,10 +1220,8 @@ namespace Chess
             prepararTableros();
         }
 
-        private void mejorJugada(object sender, EventArgs e)
+        public void buscarMejorJugada()
         {
-            this.jugadaAnterior = this.table;
-            devuelto = false;
             this.arbol = new Arbol(table);
             this.timer = Stopwatch.StartNew();
             this.arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
@@ -1238,12 +1236,21 @@ namespace Chess
                 this.miniMax = new MiniMax();
                 this.nodo = this.miniMax.miniMax(arbol.raiz);
             }
-            
+
             this.timer.Stop();
 
-            duracion.Text = timer.ElapsedMilliseconds.ToString();
+            labelDuracion.Text = timer.ElapsedMilliseconds.ToString();
+            labelJugadas.Text = arbol.cantidadJugadas.ToString();
+            labelPuntuacion.Text = arbol.raiz.utilidad.ToString();
+        }
 
-            table = nodo.tablero;
+        private void mejorJugada(object sender, EventArgs e)
+        {
+            this.jugadaAnterior = this.table;
+            devuelto = false;
+            buscarMejorJugada();
+
+            this.table = this.nodo.tablero;
             dibujar();
             // Validar si falta algún rey.
             cambiarTurno();
@@ -1264,9 +1271,24 @@ namespace Chess
                 dibujar();
                 devuelto = true;
             }
-            
-
         }
-      
+
+        private void ayuda(object sender, EventArgs e)
+        {
+            buscarMejorJugada();
+
+            int i, j, length = 8;
+
+            for (i = 0; i < length; i++) 
+            {
+                for (j = 0; j < length; j++)
+                {
+                    if (this.table[i, j] != this.nodo.tablero[i, j])
+                    {
+                        this.tablero[i, j].BackColor = System.Drawing.ColorTranslator.FromHtml("#729BB2");
+                    }
+                }
+            }
+        }
     }
 }

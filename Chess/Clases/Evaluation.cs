@@ -8,23 +8,12 @@ namespace Chess.Clases
 {
     class Evaluation
     {
-        //public int peon = 100,
-        //           caballo = 320,
-        //           alfil = 325,
-        //           torre = 500,
-        //           reina = 975,
-        //           rey = 32767;
         public double peon = 0.1,
                       caballo = 0.2,
                       alfil = 0.3,
                       torre = 0.4,
                       reina = 0.5,
                       rey = 0.6;
-        public int peonValor = 1,
-                   alfilValor = 3,
-                   caballoValor = 3,
-                   torreValor = 5,
-                   reinaValor = 9;
 
         private readonly short[] PawnTable = new short[]
         {
@@ -101,7 +90,9 @@ namespace Chess.Clases
                 alfilesBlancos = 0,
                 alfilesNegros = 0,
                 reinaBlanca = 0,
-                reinaNegra = 0;
+                reinaNegra = 0,
+                reyBlanco = 0,
+                reyNegro = 0;
 
             for (i = 0; i < length; i++)
             {
@@ -145,11 +136,18 @@ namespace Chess.Clases
                         case 15:
                             reinaBlanca++;
                             break;
+                        // Rey.
+                        case 6:
+                            reyNegro++;
+                            break;
+                        case 16:
+                            reyBlanco++;
+                            break;
                     }
                 }
             }
 
-            return (peonesBlancos - peonesNegros) + (3 * (caballosBlancos - caballosNegros)) + (((alfilesBlancos == 2 ? 3.25 : 3) * alfilesBlancos) - ((alfilesNegros == 2 ? 3.25 : 3) * alfilesNegros)) + (5 * (torresBlancas - torresNegras)) + (9 * (reinaBlanca - reinaNegra));
+            return (peonesBlancos - peonesNegros) + (3 * (caballosBlancos - caballosNegros)) + (((alfilesBlancos == 2 ? 3.25 : 3) * alfilesBlancos) - ((alfilesNegros == 2 ? 3.25 : 3) * alfilesNegros)) + (5 * (torresBlancas - torresNegras)) + (9 * (reinaBlanca - reinaNegra)) + (10000 * (reyBlanco - reyNegro));
         }
         #endregion
 
@@ -1167,7 +1165,7 @@ namespace Chess.Clases
                 }
             }
 
-            return (cantJugadasBlancas * 0.1) - (cantJugadasNegras * 0.1);
+            return (cantJugadasBlancas - cantJugadasNegras) * 0.1;
         }
 #endregion
 

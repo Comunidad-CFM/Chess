@@ -52,12 +52,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.duracion = new System.Windows.Forms.TextBox();
+            this.labelDuracion = new System.Windows.Forms.TextBox();
             this.grupoGanador = new System.Windows.Forms.GroupBox();
             this.ganador = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioMiniMax = new System.Windows.Forms.RadioButton();
             this.radioAlphaBeta = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.labelJugadas = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelPuntuacion = new System.Windows.Forms.TextBox();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -65,6 +70,8 @@
             this.grupoGanador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ganador)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -72,7 +79,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.devolverJugadaToolStripMenuItem});
+            this.devolverJugadaToolStripMenuItem,
+            this.ayudaToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -190,17 +198,17 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.duracion);
+            this.groupBox2.Controls.Add(this.labelDuracion);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // duracion
+            // labelDuracion
             // 
-            this.duracion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.duracion, "duracion");
-            this.duracion.Name = "duracion";
-            this.duracion.ReadOnly = true;
+            this.labelDuracion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.labelDuracion, "labelDuracion");
+            this.labelDuracion.Name = "labelDuracion";
+            this.labelDuracion.ReadOnly = true;
             // 
             // grupoGanador
             // 
@@ -240,11 +248,47 @@
             this.radioAlphaBeta.TabStop = true;
             this.radioAlphaBeta.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.labelJugadas);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // labelJugadas
+            // 
+            this.labelJugadas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.labelJugadas, "labelJugadas");
+            this.labelJugadas.Name = "labelJugadas";
+            this.labelJugadas.ReadOnly = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.labelPuntuacion);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
+            // 
+            // labelPuntuacion
+            // 
+            this.labelPuntuacion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.labelPuntuacion, "labelPuntuacion");
+            this.labelPuntuacion.Name = "labelPuntuacion";
+            this.labelPuntuacion.ReadOnly = true;
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            resources.ApplyResources(this.ayudaToolStripMenuItem, "ayudaToolStripMenuItem");
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayuda);
+            // 
             // index
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grupoGanador);
             this.Controls.Add(this.groupBox2);
@@ -279,6 +323,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ganador)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,13 +356,18 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox duracion;
+        private System.Windows.Forms.TextBox labelDuracion;
         private System.Windows.Forms.GroupBox grupoGanador;
         private System.Windows.Forms.PictureBox ganador;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioMiniMax;
         private System.Windows.Forms.RadioButton radioAlphaBeta;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox labelJugadas;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox labelPuntuacion;
+        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
 
 
 
