@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(index));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mejorJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.devolverJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jugadorActual = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,8 +56,8 @@
             this.grupoGanador = new System.Windows.Forms.GroupBox();
             this.ganador = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioAlphaBeta = new System.Windows.Forms.RadioButton();
             this.radioMiniMax = new System.Windows.Forms.RadioButton();
+            this.radioAlphaBeta = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -70,7 +71,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.mejorJugadaToolStripMenuItem});
+            this.toolStripMenuItem1,
+            this.devolverJugadaToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -80,11 +82,17 @@
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.reset);
             // 
-            // mejorJugadaToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            resources.ApplyResources(this.mejorJugadaToolStripMenuItem, "mejorJugadaToolStripMenuItem");
-            this.mejorJugadaToolStripMenuItem.Name = "mejorJugadaToolStripMenuItem";
-            this.mejorJugadaToolStripMenuItem.Click += new System.EventHandler(this.mejorJugada);
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.mejorJugada);
+            // 
+            // devolverJugadaToolStripMenuItem
+            // 
+            resources.ApplyResources(this.devolverJugadaToolStripMenuItem, "devolverJugadaToolStripMenuItem");
+            this.devolverJugadaToolStripMenuItem.Name = "devolverJugadaToolStripMenuItem";
+            this.devolverJugadaToolStripMenuItem.Click += new System.EventHandler(this.devolverJugada);
             // 
             // jugadorActual
             // 
@@ -216,14 +224,6 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // radioAlphaBeta
-            // 
-            resources.ApplyResources(this.radioAlphaBeta, "radioAlphaBeta");
-            this.radioAlphaBeta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioAlphaBeta.Name = "radioAlphaBeta";
-            this.radioAlphaBeta.TabStop = true;
-            this.radioAlphaBeta.UseVisualStyleBackColor = true;
-            // 
             // radioMiniMax
             // 
             resources.ApplyResources(this.radioMiniMax, "radioMiniMax");
@@ -231,6 +231,14 @@
             this.radioMiniMax.Name = "radioMiniMax";
             this.radioMiniMax.TabStop = true;
             this.radioMiniMax.UseVisualStyleBackColor = true;
+            // 
+            // radioAlphaBeta
+            // 
+            resources.ApplyResources(this.radioAlphaBeta, "radioAlphaBeta");
+            this.radioAlphaBeta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioAlphaBeta.Name = "radioAlphaBeta";
+            this.radioAlphaBeta.TabStop = true;
+            this.radioAlphaBeta.UseVisualStyleBackColor = true;
             // 
             // index
             // 
@@ -282,7 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.PictureBox jugadorActual;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ToolStripMenuItem mejorJugadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem devolverJugadaToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -306,6 +314,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioMiniMax;
         private System.Windows.Forms.RadioButton radioAlphaBeta;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 
 
 

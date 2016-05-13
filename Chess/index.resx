@@ -130,14 +130,23 @@
   <data name="archivoToolStripMenuItem.Text" xml:space="preserve">
     <value>Nuevo juego</value>
   </data>
-  <data name="mejorJugadaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="toolStripMenuItem1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
-  <data name="mejorJugadaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 24</value>
   </data>
-  <data name="mejorJugadaToolStripMenuItem.Text" xml:space="preserve">
+  <data name="toolStripMenuItem1.Text" xml:space="preserve">
     <value>Mejor jugada</value>
+  </data>
+  <data name="devolverJugadaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="devolverJugadaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 24</value>
+  </data>
+  <data name="devolverJugadaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Devolver jugada</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -741,18 +750,6 @@
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="duracion.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="duracion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 30</value>
-  </data>
-  <data name="duracion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 21</value>
-  </data>
-  <data name="duracion.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;duracion.Name" xml:space="preserve">
     <value>duracion</value>
   </data>
@@ -792,16 +789,28 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ganador.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="duracion.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="ganador.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 24</value>
+  <data name="duracion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 30</value>
   </data>
-  <data name="ganador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 50</value>
+  <data name="duracion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
   </data>
-  <data name="ganador.TabIndex" type="System.Int32, mscorlib">
+  <data name="duracion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;duracion.Name" xml:space="preserve">
+    <value>duracion</value>
+  </data>
+  <data name="&gt;&gt;duracion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;duracion.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;duracion.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;ganador.Name" xml:space="preserve">
@@ -845,6 +854,81 @@
   </data>
   <data name="&gt;&gt;grupoGanador.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ganador.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ganador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 24</value>
+  </data>
+  <data name="ganador.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 50</value>
+  </data>
+  <data name="ganador.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ganador.Name" xml:space="preserve">
+    <value>ganador</value>
+  </data>
+  <data name="&gt;&gt;ganador.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ganador.Parent" xml:space="preserve">
+    <value>grupoGanador</value>
+  </data>
+  <data name="&gt;&gt;ganador.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;radioMiniMax.Name" xml:space="preserve">
+    <value>radioMiniMax</value>
+  </data>
+  <data name="&gt;&gt;radioMiniMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioMiniMax.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;radioMiniMax.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBeta.Name" xml:space="preserve">
+    <value>radioAlphaBeta</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBeta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBeta.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBeta.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 11.25pt</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 245</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 96</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Algoritmo</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="radioMiniMax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -900,33 +984,6 @@
   <data name="&gt;&gt;radioAlphaBeta.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Unicode MS, 11.25pt</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 245</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 96</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Algoritmo</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -948,10 +1005,16 @@
   <data name="&gt;&gt;archivoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mejorJugadaToolStripMenuItem.Name" xml:space="preserve">
-    <value>mejorJugadaToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;mejorJugadaToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;devolverJugadaToolStripMenuItem.Name" xml:space="preserve">
+    <value>devolverJugadaToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;devolverJugadaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

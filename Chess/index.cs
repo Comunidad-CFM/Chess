@@ -15,9 +15,12 @@ namespace Chess
     public partial class index : Form
     {
         int[,] table,
-               bits;
+               bits,
+               jugadaAnterior = new int[8, 8];
+
         Pieza[,] tablero;
         Arbol arbol;
+
         Nodo nodo;
         MiniMax miniMax;
         AlphaBeta alphaBeta;
@@ -28,7 +31,8 @@ namespace Chess
         bool move_QB = true,
              move_RB = true,
              move_QW = true,
-             move_RW = true;
+             move_RW = true,
+             devuelto = false;
 
         public index()
         {
@@ -1201,7 +1205,9 @@ namespace Chess
                     validar();
                     break;
 
-                case 2:
+                case 2:                    
+                    Array.Copy(this.table, this.jugadaAnterior, 64);
+                    devuelto = false;
                     cambiarPiezas(i, j);
                     cambiarTurno();
                     setJugadorActual();
@@ -1216,6 +1222,8 @@ namespace Chess
 
         private void mejorJugada(object sender, EventArgs e)
         {
+            this.jugadaAnterior = this.table;
+            devuelto = false;
             this.arbol = new Arbol(table);
             this.timer = Stopwatch.StartNew();
             this.arbol.arbolDeJugadas(arbol.raiz, turnoActual, 4);
@@ -1241,5 +1249,24 @@ namespace Chess
             cambiarTurno();
             setJugadorActual();
         }
+
+        /// <summary>
+        /// Devolver la ultima jugada hecha
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void devolverJugada(object sender, EventArgs e)
+        {
+            if (!devuelto) { 
+                Array.Copy(this.jugadaAnterior, this.table, 64);                              
+                cambiarTurno();
+                setJugadorActual();
+                dibujar();
+                devuelto = true;
+            }
+            
+
+        }
+      
     }
 }
