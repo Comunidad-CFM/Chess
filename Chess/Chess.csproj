@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\AlphaBeta.cs" />
+    <Compile Include="Clases\AlphaBetaSort.cs" />
     <Compile Include="Clases\Arbol.cs" />
     <Compile Include="Clases\Cuadro.cs" />
     <Compile Include="Clases\Evaluation.cs" />

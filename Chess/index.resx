@@ -202,7 +202,7 @@
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 43</value>
+    <value>480, 38</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 80</value>
@@ -778,7 +778,7 @@
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 125</value>
+    <value>480, 118</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 60</value>
@@ -829,7 +829,7 @@
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="grupoGanador.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 390</value>
+    <value>480, 395</value>
   </data>
   <data name="grupoGanador.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 80</value>
@@ -854,6 +854,36 @@
   </data>
   <data name="&gt;&gt;grupoGanador.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="radioAlphaBetaSort.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioAlphaBetaSort.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioAlphaBetaSort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 64</value>
+  </data>
+  <data name="radioAlphaBetaSort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="radioAlphaBetaSort.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="radioAlphaBetaSort.Text" xml:space="preserve">
+    <value>AlphaBetaSort</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBetaSort.Name" xml:space="preserve">
+    <value>radioAlphaBetaSort</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBetaSort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBetaSort.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;radioAlphaBetaSort.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="radioMiniMax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -880,7 +910,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;radioMiniMax.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="radioAlphaBeta.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -907,16 +937,16 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;radioAlphaBeta.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 188</value>
+    <value>480, 178</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 70</value>
+    <value>135, 95</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -964,7 +994,7 @@
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 262</value>
+    <value>480, 277</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 60</value>
@@ -1015,7 +1045,7 @@
     <value>Arial Unicode MS, 11.25pt</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 327</value>
+    <value>480, 337</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 60</value>

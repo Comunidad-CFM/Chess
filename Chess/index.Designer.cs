@@ -62,6 +62,7 @@
             this.labelJugadas = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labelPuntuacion = new System.Windows.Forms.TextBox();
+            this.radioAlphaBetaSort = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -224,6 +225,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.radioAlphaBetaSort);
             this.groupBox3.Controls.Add(this.radioMiniMax);
             this.groupBox3.Controls.Add(this.radioAlphaBeta);
             resources.ApplyResources(this.groupBox3, "groupBox3");
@@ -273,6 +275,14 @@
             resources.ApplyResources(this.labelPuntuacion, "labelPuntuacion");
             this.labelPuntuacion.Name = "labelPuntuacion";
             this.labelPuntuacion.ReadOnly = true;
+            // 
+            // radioAlphaBetaSort
+            // 
+            resources.ApplyResources(this.radioAlphaBetaSort, "radioAlphaBetaSort");
+            this.radioAlphaBetaSort.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioAlphaBetaSort.Name = "radioAlphaBetaSort";
+            this.radioAlphaBetaSort.TabStop = true;
+            this.radioAlphaBetaSort.UseVisualStyleBackColor = true;
             // 
             // index
             // 
@@ -359,6 +369,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox labelPuntuacion;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.RadioButton radioAlphaBetaSort;
 
 
 

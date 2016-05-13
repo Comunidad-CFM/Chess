@@ -24,6 +24,7 @@ namespace Chess
         Nodo nodo;
         MiniMax miniMax;
         AlphaBeta alphaBeta;
+        AlphaBetaSort alphaBetaSort;
         Stopwatch timer;
         int I, 
             J,
@@ -1296,10 +1297,15 @@ namespace Chess
                 this.alphaBeta = new AlphaBeta();
                 this.nodo = this.alphaBeta.alphaBeta(arbol.raiz);
             }
-            else
+            else if (radioMiniMax.Checked)
             {
                 this.miniMax = new MiniMax();
                 this.nodo = this.miniMax.miniMax(arbol.raiz);
+            }
+            else if (radioAlphaBetaSort.Checked)
+            {
+                this.alphaBetaSort = new AlphaBetaSort();
+                this.nodo = this.alphaBetaSort.alphaBetaSort(arbol.raiz);
             }
 
             this.timer.Stop();
