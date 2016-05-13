@@ -63,11 +63,17 @@ namespace Chess
         private void index_Load(object sender, EventArgs e)
         { }
 
+        /// <summary>
+        /// Cambia el turno de los jugadores.
+        /// </summary>
         public void cambiarTurno() 
         { 
             turnoActual = turnoActual % 2 + 1;
         }
 
+        /// <summary>
+        /// Pinta en la UI el jugador actual.
+        /// </summary>
         public void setJugadorActual() {
             if (turnoActual == 1)
             {
@@ -79,6 +85,9 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Inicializa los tableros utilizados para el juego.
+        /// </summary>
         public void inicializarTableros() 
         {
             this.tablero = new Pieza[8, 8];
@@ -96,6 +105,9 @@ namespace Chess
             };
         }
 
+        /// <summary>
+        /// Resetea uno de los tableros utilizados.
+        /// </summary>
         public void resetearBits()
         {
             int i, j, length = 8;
@@ -112,20 +124,29 @@ namespace Chess
             J = 0;
         }
 
-        public void finDeJuego(int codigo) 
+        /// <summary>
+        /// Valida si es fin de juego.
+        /// </summary>
+        public void finDeJuego() 
         {
-            if (codigo == 6) // Ganan las blancas
+            bool reyNegro = buscarPieza(this.table, 6);
+            bool reyBlanco = buscarPieza(this.table, 16);
+
+            if (!reyNegro) // Ganan las blancas.
             {
                 ganador.ImageLocation = @"..\..\Imagenes\knight_white.png";
                 grupoGanador.Visible = true;
             }
-            else if (codigo == 16) // Ganan las negras
+            else if (!reyBlanco) // Ganan las negras.
             {
                 ganador.ImageLocation = @"..\..\Imagenes\knight_black.png";
                 grupoGanador.Visible = true;
             }
         }
 
+        /// <summary>
+        /// Actualiza los tableros de juego.
+        /// </summary>
         public void validar()
         {
             int i, j, length = 8;
@@ -156,6 +177,11 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Cambia piezas en el tablero de juego.
+        /// </summary>
+        /// <param name="i">Fila.</param>
+        /// <param name="j">Columna.</param>
         public void cambiarPiezas(int i, int j)
         {
             int codigo = this.table[i, j];
@@ -189,9 +215,12 @@ namespace Chess
             validar();
             dibujar();
             marcarJugadas();
-            finDeJuego(codigo);
+            finDeJuego();
         }
 
+        /// <summary>
+        /// Dibuja el tablero de juego en la UI.
+        /// </summary>
         public void dibujar() 
         {
             int i, j, length = 8;
@@ -220,6 +249,9 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Prepara los tableros para el inicio del juego.
+        /// </summary>
         public void prepararTableros()
         {
             inicializarTableros();
@@ -277,6 +309,9 @@ namespace Chess
             dibujar();
         }
 
+        /// <summary>
+        /// Da sugerencias de las jugadas que puede realizar una pieza seleccionada.
+        /// </summary>
         public void marcarJugadas()
         {
             int i, j, length = 8;
@@ -320,6 +355,12 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Valida si una jugada es valida.
+        /// </summary>
+        /// <param name="codigo">Codigo de la pieza.</param>
+        /// <param name="i">Fila de la posición de la pieza.</param>
+        /// <param name="j">Columna de la posición de la pieza.</param>
         public void validarJugada(int codigo, int i, int j)
         {
             resetearBits();
@@ -1188,6 +1229,11 @@ namespace Chess
             marcarJugadas();
         }
 
+        /// <summary>
+        /// Accion de cada pieza.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void click(object sender, EventArgs e)
         {
             int i = (sender as Pieza).i;
@@ -1215,11 +1261,30 @@ namespace Chess
             }
         }
 
-        private void reset(object sender, EventArgs e)
+        /// <summary>
+        /// Busca una pieza por codigo.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="codigo">Codigo de la pieza a buscar.</param>
+        /// <returns>True si la encuentra, false sino la encuentra.</returns>
+        private bool buscarPieza(int[,] tablero, int codigo)
         {
-            prepararTableros();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (tablero[i, j] == codigo)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
+        /// <summary>
+        /// Se encarga de obtener la mejor jugada y de obtener la duración del proceso.
+        /// </summary>
         public void buscarMejorJugada()
         {
             this.arbol = new Arbol(table);
@@ -1244,6 +1309,11 @@ namespace Chess
             labelPuntuacion.Text = arbol.raiz.utilidad.ToString();
         }
 
+        /// <summary>
+        /// Se encarga de realizar la mejor jugada y de pintarla en la UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mejorJugada(object sender, EventArgs e)
         {
             this.jugadaAnterior = this.table;
@@ -1255,6 +1325,8 @@ namespace Chess
             // Validar si falta algún rey.
             cambiarTurno();
             setJugadorActual();
+
+            finDeJuego();            
         }
 
         /// <summary>
@@ -1273,6 +1345,11 @@ namespace Chess
             }
         }
 
+        /// <summary>
+        /// Sugiere la mejor jugada al jugador.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ayuda(object sender, EventArgs e)
         {
             buscarMejorJugada();

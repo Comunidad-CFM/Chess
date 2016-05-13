@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(index));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.devolverJugadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jugadorActual = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,7 +62,6 @@
             this.labelJugadas = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labelPuntuacion = new System.Windows.Forms.TextBox();
-            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.jugadorActual)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -77,18 +76,11 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
             this.toolStripMenuItem1,
             this.devolverJugadaToolStripMenuItem,
             this.ayudaToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            resources.ApplyResources(this.archivoToolStripMenuItem, "archivoToolStripMenuItem");
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Click += new System.EventHandler(this.reset);
             // 
             // toolStripMenuItem1
             // 
@@ -101,6 +93,12 @@
             resources.ApplyResources(this.devolverJugadaToolStripMenuItem, "devolverJugadaToolStripMenuItem");
             this.devolverJugadaToolStripMenuItem.Name = "devolverJugadaToolStripMenuItem";
             this.devolverJugadaToolStripMenuItem.Click += new System.EventHandler(this.devolverJugada);
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            resources.ApplyResources(this.ayudaToolStripMenuItem, "ayudaToolStripMenuItem");
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayuda);
             // 
             // jugadorActual
             // 
@@ -276,12 +274,6 @@
             this.labelPuntuacion.Name = "labelPuntuacion";
             this.labelPuntuacion.ReadOnly = true;
             // 
-            // ayudaToolStripMenuItem
-            // 
-            resources.ApplyResources(this.ayudaToolStripMenuItem, "ayudaToolStripMenuItem");
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayuda);
-            // 
             // index
             // 
             resources.ApplyResources(this, "$this");
@@ -335,7 +327,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.PictureBox jugadorActual;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem devolverJugadaToolStripMenuItem;

@@ -18,6 +18,12 @@ namespace Chess.Clases
             this.evaluation = new Evaluation();
         }
 
+        /// <summary>
+        /// Este metodo obtiene las piezas para un jugador en específico.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <returns>Lista de las piezas del jugador.</returns>
         public List<Cuadro> obtenerCuadros(int[,] tablero, int jugador)
         {
             List<Cuadro> cuadros = new List<Cuadro>();
@@ -41,6 +47,13 @@ namespace Chess.Clases
             return cuadros;
         }
 
+        /// <summary>
+        /// Limpia una posición específica del tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="i">Fila a limpiar.</param>
+        /// <param name="j">Columna a limpiar.</param>
+        /// <returns>El tablero con dicha posición vacía.</returns>
         public int[,] limpiarCuadro(int[,] tablero, int i, int j)
         {
             int[,] copiaTablero = new int[8, 8];
@@ -51,6 +64,15 @@ namespace Chess.Clases
             return copiaTablero;
         }
 
+        /// <summary>
+        /// Realiza una jugada en un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="i">Fila de la posición vieja de la pieza.</param>
+        /// <param name="j">Columna de la posición vieja de la pieza.</param>
+        /// <param name="nuevoI">Fila de la nueva posición de la pieza.</param>
+        /// <param name="nuevoJ">Columna de la nueva posición de la pieza.</param>
+        /// <returns>El tablero con la jugada realizada.</returns>
         public int[,] obtenerTablero(int[,] tablero, int i, int j, int nuevoI, int nuevoJ)
         {
             int[,] copiaTablero = new int[8, 8];
@@ -62,6 +84,14 @@ namespace Chess.Clases
             return copiaTablero;
         }
 
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar un peon específico a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición del peón.</param>
+        /// <param name="j">Columna de la posición del peón.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> peon(int[,] tablero, int jugador, int i, int j) 
         {
             List<int[,]> tableros = new List<int[,]>();
@@ -139,6 +169,14 @@ namespace Chess.Clases
             return tableros;
         }
 
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar una torre específica a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición de la torre.</param>
+        /// <param name="j">Columna de la posición de la torre.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> torre(int[,] tablero, int jugador, int i, int j)
         { 
             List<int[,]> tableros = new List<int[,]>();
@@ -285,6 +323,14 @@ namespace Chess.Clases
             return tableros;
         }
 
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar un caballo específico a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición del caballo.</param>
+        /// <param name="j">Columna de la posición del caballo.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> caballo(int[,] tablero, int jugador, int i, int j)
         {
             List<int[,]> tableros = new List<int[,]>();
@@ -430,6 +476,14 @@ namespace Chess.Clases
             return tableros;
         }
 
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar un alfil específico a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición del alfil.</param>
+        /// <param name="j">Columna de la posición del alfil.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> alfil(int[,] tablero, int jugador, int i, int j)
         { 
             List<int[,]> tableros = new List<int[,]>();
@@ -583,7 +637,15 @@ namespace Chess.Clases
 
             return tableros;
         }
-        
+
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar la reina a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición de la reina.</param>
+        /// <param name="j">Columna de la posición de la reina.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> reina(int[,] tablero, int jugador, int i, int j)
         { 
             List<int[,]> tableros = new List<int[,]>();
@@ -869,7 +931,15 @@ namespace Chess.Clases
 
             return tableros;
         }
-        
+
+        /// <summary>
+        /// Obtiene una lista de tableros las jugadas que puede realizar el rey a partir de un tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="i">Fila de la posición del rey.</param>
+        /// <param name="j">Columna de la posición del rey.</param>
+        /// <returns>Lista de tableros.</returns>
         public List<int[,]> rey(int[,] tablero, int jugador, int i, int j)
         { 
             List<int[,]> tableros = new List<int[,]>();
@@ -983,6 +1053,12 @@ namespace Chess.Clases
             return tableros;
         }
 
+        /// <summary>
+        /// Agrega hijos a la lista de hijos de un nodo.
+        /// </summary>
+        /// <param name="hijos">Lista de hijos del nodo.</param>
+        /// <param name="tableros">Lista de tableros a agregar a la lista de hijos.</param>
+        /// <returns>La lista de hijos con los tableros agregados.</returns>
         public List<Nodo> agregarHijos(List<Nodo> hijos, List<int[,]> tableros) 
         {
             foreach (int[,] tablero in tableros)
@@ -993,6 +1069,12 @@ namespace Chess.Clases
             return hijos;
         }
 
+        /// <summary>
+        /// Metodo principal que recorre la lista de las piezas de un jugador y obtiene los tableros con las posibles jugadas.
+        /// </summary>
+        /// <param name="nodo">Nodo al que se van a buscar sus hijos.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <returns>Lista con los nodos hijos.</returns>
         public List<Nodo> obtenerNivel(Nodo nodo, int jugador)
         {
             List<Cuadro> cuadros = this.obtenerCuadros(nodo.tablero, jugador);
@@ -1031,6 +1113,12 @@ namespace Chess.Clases
             return nodo.hijos;
         }
 
+        /// <summary>
+        /// Metodo recursivo que se encarga de generar el arbol de jugadas.
+        /// </summary>
+        /// <param name="nodo">Nodo al cual se le van a generar sus nodos hijos.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <param name="profundidad">Numero de profundidad.</param>
         public void arbolDeJugadas(Nodo nodo, int jugador, int profundidad) 
         {
             if (profundidad == 0)
@@ -1039,11 +1127,11 @@ namespace Chess.Clases
             cantidadJugadas += nodo.hijos.Count;
 
             jugador = jugador % 2 + 1;
-            foreach (Nodo hijo in nodo.hijos)
+            Parallel.ForEach(nodo.hijos, hijo =>
             {
                 hijo.utilidad = evaluation.utilidad(nodo.tablero, jugador % 2 + 1);
                 arbolDeJugadas(hijo, jugador, profundidad - 1);
-            }            
+            });
         }
     }
 }

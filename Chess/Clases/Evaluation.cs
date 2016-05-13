@@ -75,6 +75,11 @@ namespace Chess.Clases
         { }
 
         #region Heuristica por valor de la pieza.
+        /// <summary>
+        /// Determina la utilidad del tablero a partir del valor de las piezas.
+        /// </summary>
+        /// <param name="tablero"></param>
+        /// <returns></returns>
         public double valorPosicion(int[,] tablero) 
         {
             int i,
@@ -152,6 +157,11 @@ namespace Chess.Clases
         #endregion
 
         #region Heuristica por valor de la posicion.
+        /// <summary>
+        /// Determina el valor de una determinda pieza.
+        /// </summary>
+        /// <param name="codigo">Codigo de la pieza.</param>
+        /// <returns>Valor de la pieza.</returns>
         public double valorPieza(int codigo) 
         {
             double valor = 0;
@@ -186,6 +196,11 @@ namespace Chess.Clases
             return valor;
         }
 
+        /// <summary>
+        /// Verifica si el tablero se encuentra en fase final.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <returns>Numero de piezas del tablero.</returns>
         public int isEndGamePhase(int[,] tablero)
         {
             int i,
@@ -205,7 +220,15 @@ namespace Chess.Clases
             return count;
         }
 
-        public double EvaluatePieceScore(Cuadro cuadro, bool endGamePhase, ref byte bishopCount, ref bool insufficientMaterial)
+        /// <summary>
+        /// Determina la utilidad para una determinada pieza.
+        /// </summary>
+        /// <param name="cuadro">Cuadro de la pieza.</param>
+        /// <param name="endGamePhase">Si es fase final de juego.</param>
+        /// <param name="bishopCount">Cantidad de alfiles.</param>
+        /// <param name="insufficientMaterial"></param>
+        /// <returns></returns>
+        public double EvaluatePieceScore(Cuadro cuadro, bool endGamePhase, ref byte bishopCount)
         {
             double score = 0;
             byte index = (byte)(cuadro.i * 8 + cuadro.j);
@@ -283,11 +306,15 @@ namespace Chess.Clases
             return score;
         }
 
+        /// <summary>
+        /// Recorre el tablero de juego para evaluar cada una de las piezas.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <returns>Utilidad del tablero.</returns>
         public double EvaluateBoardScore(int[,] tablero) 
         {
             double utilidad = 0;
-            bool insufficientMaterial = true,
-                endGamephase = (isEndGamePhase(tablero) <= 10 ? true : false);
+            bool endGamephase = (isEndGamePhase(tablero) <= 10 ? true : false);
 
             byte blackBishopCount = 0;
             byte whiteBishopCount = 0;
@@ -311,26 +338,16 @@ namespace Chess.Clases
 
                     if (cuadro.codigo > 10) // Blancas.
                     {
-                        utilidad += EvaluatePieceScore(cuadro, endGamephase, ref whiteBishopCount, ref insufficientMaterial);
+                        utilidad += EvaluatePieceScore(cuadro, endGamephase, ref whiteBishopCount);
                     }
                     else if (cuadro.codigo < 10 && cuadro.codigo != 0) // Negras
                     {
-                        utilidad -= EvaluatePieceScore(cuadro, endGamephase, ref whiteBishopCount, ref insufficientMaterial);
+                        utilidad -= EvaluatePieceScore(cuadro, endGamephase, ref blackBishopCount);
                     }
 
                     if (cuadro.codigo == 6 || cuadro.codigo == 16)
                     {
                         knightCount++;
-
-                        if (knightCount > 1)
-                        {
-                            insufficientMaterial = false;
-                        }
-                    }
-
-                    if ((blackBishopCount + whiteBishopCount) > 1)
-                    {
-                        insufficientMaterial = false;
                     }
                 }    
             }
@@ -340,6 +357,13 @@ namespace Chess.Clases
         #endregion
 
         #region Heuristica por cantidad de casillas movibles.
+        /// <summary>
+        /// Determina la cantidad de jugadas que puede realizar una pieza blanca.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="i">Fila de la posición de la pieza.</param>
+        /// <param name="j">Columna de la posición de la pieza.</param>
+        /// <returns>Cantidad de jugadas.</returns>
         public int jugadasBlancas(int[,] tablero, int i, int j)
         {
             int jugadas = 0, c;
@@ -741,6 +765,13 @@ namespace Chess.Clases
             return jugadas;
         }
 
+        /// <summary>
+        /// Determina la cantidad de jugadas que puede realizar una pieza negra.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="i">Fila de la posición de la pieza.</param>
+        /// <param name="j">Columna de la posición de la pieza.</param>
+        /// <returns>Cantidad de jugadas.</returns>
         public int jugadasNegras(int[,] tablero, int i, int j)
         {
             int jugadas = 0, c;
@@ -1146,6 +1177,11 @@ namespace Chess.Clases
             return jugadas;
         }
 
+        /// <summary>
+        /// Recorre el tablero de juego para evaluar cada una de las piezas del tablero.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <returns>Utilidad del tablero.</returns>
         public double movimientos(int[,] tablero)
         {
             int i, j, length = 8, cantJugadasBlancas = 0, cantJugadasNegras = 0;
@@ -1170,6 +1206,12 @@ namespace Chess.Clases
 #endregion
 
         #region Heuristica de defensa del rey.
+        /// <summary>
+        /// Busca la fila y columna de una pieza por su codigo.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="codigo">Codigo de la pieza.</param>
+        /// <returns>Arreglo con la fila y columna.</returns>
         public int[] buscarPieza(int[,] tablero, int codigo)
         {
             int[] posicion = new int[2];
@@ -1187,6 +1229,14 @@ namespace Chess.Clases
             }
             return posicion;
         }
+        
+        /// <summary>
+        /// Recorre el tablero de juego validando que tan protejidos estan los reyes.
+        /// </summary>
+        /// <param name="tablero">Tablero de juego.</param>
+        /// <param name="i">Fila de la posición del rey.</param>
+        /// <param name="j">Columna de la posición del rey.</param>
+        /// <returns>Utilidad del tablero.</returns>
         public double defensa(int[,] tablero, int i, int j)
         {
             double puntos = 0;
@@ -1346,6 +1396,12 @@ namespace Chess.Clases
         }
         #endregion
 
+        /// <summary>
+        /// Metodo principal que se encarga de llamar a todas las heuristicas.
+        /// </summary>
+        /// <param name="tablero">Tablero a evaluar.</param>
+        /// <param name="jugador">Jugador actual.</param>
+        /// <returns>Utilidad del tablero.</returns>
         public double utilidad(int[,] tablero, int jugador) 
         {
             int[] posicion = buscarPieza(tablero, (jugador == 1 ? 16 : 6));
