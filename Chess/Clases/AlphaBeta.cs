@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Chess.Clases
 {
+    // Algoritmo alpha-beta
+    // Busqueda por niveles(max, min), en un arbol de la mejor hoja segun la utilidad. Tambien utiliza poda en la busqueda
     class AlphaBeta
     {
         public double alphaAux,
@@ -16,6 +18,7 @@ namespace Chess.Clases
             this.betaAux = 0;
         }
 
+        // Busqueda del nivel alpha
         public double alphaMax(Nodo raiz, double alpha, double beta)
         {
             if (raiz.hijos.Count == 0)
@@ -34,6 +37,7 @@ namespace Chess.Clases
             return alpha;
         }
 
+        // Busqueda del nivel min
         public double betaMin(Nodo raiz, double alpha, double beta)
         {
             if (raiz.hijos.Count == 0)
@@ -52,6 +56,7 @@ namespace Chess.Clases
             return beta;
         }
 
+        // Reduce el numero de nodos evaluados cuando se encuentra con una peores posibilidades que las previamente evaluadas
         public Nodo alphaBeta(Nodo raiz)
         {
             double utilidad;

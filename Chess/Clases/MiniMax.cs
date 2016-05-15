@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Chess.Clases
 {
+    // Algoritmo min-max
+    // Busqueda por niveles(max, min), en un arbol de la mejor hoja segun la utilidad. Se evaluan todos los nodos
     class MiniMax
     {
         public bool max = true;
@@ -13,6 +15,7 @@ namespace Chess.Clases
         public MiniMax()
         { }
 
+        // Se recorre el arbol por completo y retorna la mejor utilidad
         public double miniMax2(Nodo raiz, Boolean Player)
         {
             if (raiz.hijos.Count == 0)

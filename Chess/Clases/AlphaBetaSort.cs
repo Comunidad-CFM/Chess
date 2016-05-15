@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Chess.Clases
 {
+    // Algoritmo alpha-beta-sort
+    // Busqueda por niveles(max, min), en un arbol de la mejor hoja segun la utilidad.
+    // Tambien utiliza poda en la busqueda y en las hojas se escoje la mejor hoja segun el nivel sin necesidad de evaluarlas todas
     class AlphaBetaSort
     {
         public double alphaAux,
@@ -67,6 +70,7 @@ namespace Chess.Clases
                 return padre.hijos.ElementAt(0).utilidad; // retorna al hijo con menor utilidad utilidad
         }
 
+        // Reduce el numero de nodos evaluados cuando se encuentra con una peores posibilidades que las previamente evaluadas
         public Nodo alphaBetaSort(Nodo raiz)
         {
             double utilidad;
