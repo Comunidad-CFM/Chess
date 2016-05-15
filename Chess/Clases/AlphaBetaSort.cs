@@ -11,14 +11,8 @@ namespace Chess.Clases
     // Tambien utiliza poda en la busqueda y en las hojas se escoje la mejor hoja segun el nivel sin necesidad de evaluarlas todas
     class AlphaBetaSort
     {
-        //public double alphaAux,
-        //        betaAux;
-
         public AlphaBetaSort()
-        {
-            //this.alphaAux = 0;
-            //this.betaAux = 0;
-        }
+        { }
 
         // Evalua el nivel Max
         public double AlphaSort(Nodo raiz, double alpha, double beta) // Max
@@ -80,17 +74,6 @@ namespace Chess.Clases
         public Nodo alphaBetaSort(Nodo raiz)
         {
             double utilidad;
-            //foreach (Nodo nodo in raiz.hijos)
-            //{
-            //    utilidad = AlphaSort(nodo, -1000000, 1000000);
-
-            //    if (raiz.utilidad <= utilidad)
-            //    {
-            //        raiz.tablero = nodo.tablero;
-            //        raiz.utilidad = utilidad;
-            //    }
-            //}
-
 
             Parallel.ForEach(raiz.hijos, nodo =>
             {

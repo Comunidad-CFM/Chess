@@ -10,13 +10,8 @@ namespace Chess.Clases
     // Busqueda por niveles(max, min), en un arbol de la mejor hoja segun la utilidad. Tambien utiliza poda en la busqueda
     class AlphaBeta
     {
-        //public double alphaAux,
-        //              betaAux;
         public AlphaBeta()
-        {
-            //this.alphaAux = 0;
-            //this.betaAux = 0;
-        }
+        { }
 
         // Busqueda del nivel Max
         public double alphaMax(Nodo raiz, double alpha, double beta)
@@ -65,17 +60,6 @@ namespace Chess.Clases
         public Nodo alphaBeta(Nodo raiz)
         {
             double utilidad = 0;
-            //foreach (Nodo nodo in raiz.hijos)
-            //{
-            //    utilidad = alphaMax(nodo, -1000000, 1000000);
-            //    Console.WriteLine(utilidad);
-
-            //    if (raiz.utilidad <= utilidad)
-            //    {
-            //        raiz.tablero = nodo.tablero;
-            //        raiz.utilidad = utilidad;
-            //    }
-            //}
 
             Parallel.ForEach(raiz.hijos, nodo =>
             {

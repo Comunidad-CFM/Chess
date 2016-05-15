@@ -49,16 +49,6 @@ namespace Chess.Clases
         public Nodo miniMax(Nodo raiz) 
         {
             double utilidad;
-            //foreach (Nodo nodo in raiz.hijos)
-            //{
-            //    utilidad = miniMax2(nodo, true);
-
-            //    if (raiz.utilidad <= utilidad)
-            //    {
-            //        raiz.tablero = nodo.tablero;
-            //        raiz.utilidad = utilidad;
-            //    }
-            //}
 
             Parallel.ForEach(raiz.hijos, nodo =>
             {
