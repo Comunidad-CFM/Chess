@@ -31,3 +31,10 @@ C:\Users\Fauricio\Documents\Visual Studio 2012\Projects\Chess\Chess\obj\Debug\Ch
 C:\Users\car_e\Documents\Proyecto\Chess\Chess\bin\Debug\Chess.exe.config
 C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.exe
 C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.index.resources
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.Pieza.resources
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.Properties.Resources.resources
+C:\Users\car_e\Documents\Proyecto\Chess\Chess\obj\Debug\Chess.csproj.GenerateResource.Cache
