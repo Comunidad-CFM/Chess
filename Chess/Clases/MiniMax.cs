@@ -15,7 +15,7 @@ namespace Chess.Clases
         public MiniMax()
         { }
 
-        // Se recorre el arbol por completo y retorna la mejor utilidad
+        // Se recorre el arbol recursivamente por completo y retorna la mejor utilidad
         public double miniMax2(Nodo raiz, Boolean Player)
         {
             if (raiz.hijos.Count == 0)
@@ -23,7 +23,7 @@ namespace Chess.Clases
                 return raiz.utilidad;
             }
 
-            if (Player == max)
+            if (Player == max) // Nivel Max
             {
                 double utilidadMax = -1000000;
                 foreach (Nodo hijo in raiz.hijos)
@@ -33,7 +33,7 @@ namespace Chess.Clases
 
                 return utilidadMax;
             }
-            else
+            else // Nivel Min
             {
                 double utilidadMin = 1000000;
                 foreach (Nodo hijo in raiz.hijos)
@@ -45,6 +45,7 @@ namespace Chess.Clases
             }
         }
 
+        // Se obtiene la utilidad de cada hijo de la raiz
         public Nodo miniMax(Nodo raiz) 
         {
             double utilidad;
@@ -58,7 +59,6 @@ namespace Chess.Clases
                     raiz.utilidad = utilidad;
                 }
             }
-            
             return raiz;
         }
     }

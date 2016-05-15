@@ -18,7 +18,7 @@ namespace Chess.Clases
             this.betaAux = 0;
         }
 
-        // Busqueda del nivel alpha
+        // Busqueda del nivel Max
         public double alphaMax(Nodo raiz, double alpha, double beta)
         {
             if (raiz.hijos.Count == 0)
@@ -37,7 +37,7 @@ namespace Chess.Clases
             return alpha;
         }
 
-        // Busqueda del nivel min
+        // Busqueda del nivel Min
         public double betaMin(Nodo raiz, double alpha, double beta)
         {
             if (raiz.hijos.Count == 0)
@@ -57,12 +57,13 @@ namespace Chess.Clases
         }
 
         // Reduce el numero de nodos evaluados cuando se encuentra con una peores posibilidades que las previamente evaluadas
+        // Se obtiene la utilidad de cada hijo de la raiz
         public Nodo alphaBeta(Nodo raiz)
         {
             double utilidad;
             foreach (Nodo nodo in raiz.hijos)
             {
-                utilidad = alphaMax(nodo, -1000, 1000);
+                utilidad = alphaMax(nodo, -10000, 10000);
 
                 if (raiz.utilidad <= utilidad)
                 {

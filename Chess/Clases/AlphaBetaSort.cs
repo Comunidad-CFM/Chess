@@ -71,6 +71,7 @@ namespace Chess.Clases
         }
 
         // Reduce el numero de nodos evaluados cuando se encuentra con una peores posibilidades que las previamente evaluadas
+        // Se obtiene la utilidad de cada hijo de la raiz
         public Nodo alphaBetaSort(Nodo raiz)
         {
             double utilidad;
