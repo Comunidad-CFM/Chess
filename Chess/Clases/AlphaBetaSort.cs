@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Chess.Clases
 {
@@ -79,9 +80,30 @@ namespace Chess.Clases
         public Nodo alphaBetaSort(Nodo raiz)
         {
             double utilidad;
+            //foreach (Nodo nodo in raiz.hijos)
+            //{
+            //    utilidad = AlphaSort(nodo, -1000000, 1000000);
+
+            //    if (raiz.utilidad <= utilidad)
+            //    {
+            //        raiz.tablero = nodo.tablero;
+            //        raiz.utilidad = utilidad;
+            //    }
+            //}
+
+
+            Parallel.ForEach(raiz.hijos, nodo =>
+            {
+                lock (nodo)
+                {
+                    nodo.utilidad = AlphaSort(nodo, -1000000, 1000000);
+                }
+
+            });
+
             foreach (Nodo nodo in raiz.hijos)
             {
-                utilidad = AlphaSort(nodo, -1000000, 1000000);
+                utilidad = nodo.utilidad;
 
                 if (raiz.utilidad <= utilidad)
                 {
